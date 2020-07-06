@@ -1,5 +1,8 @@
 {
-  "name": "eleave-v3-master",
-  "integrations": {},
+  "name": "eleave-user",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }

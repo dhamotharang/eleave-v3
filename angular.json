@@ -1,10 +1,10 @@
 {
   "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
   "version": 1,
-  "defaultProject": "eleave-v3-master",
+  "defaultProject": "app",
   "newProjectRoot": "projects",
   "projects": {
-    "eleave-v3-master": {
+    "app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -74,11 +74,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "eleave-v3-master:build"
+            "browserTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "eleave-v3-master:build:production"
+              "browserTarget": "app:build:production"
             },
             "ci": {
               "progress": false
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "eleave-v3-master:build"
+            "browserTarget": "app:build"
           }
         },
         "test": {
@@ -130,24 +130,24 @@
         "ionic-cordova-build": {
           "builder": "@ionic/angular-toolkit:cordova-build",
           "options": {
-            "browserTarget": "eleave-v3-master:build"
+            "browserTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "eleave-v3-master:build:production"
+              "browserTarget": "app:build:production"
             }
           }
         },
         "ionic-cordova-serve": {
           "builder": "@ionic/angular-toolkit:cordova-serve",
           "options": {
-            "cordovaBuildTarget": "eleave-v3-master:ionic-cordova-build",
-            "devServerTarget": "eleave-v3-master:serve"
+            "cordovaBuildTarget": "app:ionic-cordova-build",
+            "devServerTarget": "app:serve"
           },
           "configurations": {
             "production": {
-              "cordovaBuildTarget": "eleave-v3-master:ionic-cordova-build:production",
-              "devServerTarget": "eleave-v3-master:serve:production"
+              "cordovaBuildTarget": "app:ionic-cordova-build:production",
+              "devServerTarget": "app:serve:production"
             }
           }
         }

@@ -308,7 +308,7 @@
             <div style="background-color: #ffffff;padding: 10px;">
                 <div
                     style="font-size: 12px;width:100%;background: #f5f6fa;padding: 10px;padding-left: 15px;color: #a3a6b4;font-weight: bold;">
-                    LATEST ANNOUNCEMENT<p
+                    LATEST ANNOUNCEMENT<p *ngIf="announcements.length !== 0"
                         (click)="menuOpen=true;menu.enable(true, 'viewAnnouncementDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewHolidayDetails');menu.open('viewAnnouncementDetails');"
                         style="cursor: pointer;margin-top: 0px;float: right;margin-right: 5px;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
                         View Details</p>
@@ -331,6 +331,11 @@
                         <ion-item *ngIf="i<2" class="divider" style="padding: 0;" lines="full"></ion-item>
                     </ng-container>
                 </ion-row>
+                <ng-container>
+                    <p *ngIf="announcements.length === 0"
+                        style="padding-left: 15px;color: rgb(77, 79, 92);font-size: 11px;line-height: 1.82;">
+                        No latest announcement</p>
+                </ng-container>
             </div>
         </div>
         <div class="holiday" *ngIf="holidays">
