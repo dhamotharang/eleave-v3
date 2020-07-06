@@ -103,7 +103,7 @@ webpack                           4.28.4
 
 # Environment variable
 PORT = 8101
-API_URL =  https://appcore.beesuite.app
-FORGET_PASS_URL = https://resetpassword.beesuite.app
+API_URL =  https://zencore.zen.com.my:3000
+FORGET_PASS_URL = https://zencore.zen.com.my:8104
 
 ```
