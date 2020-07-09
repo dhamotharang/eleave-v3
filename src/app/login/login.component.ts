@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '$user-root/src/services/shared-service/auth.service';
+import { AuthService } from '../../../src/services/shared-service/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Headers, Http } from '@angular/http';
-import { environment } from '$user-root/src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 /**
  * Login component
@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
     this._auth.session.set('email', email);
     this._auth.login(email, password)
       .subscribe(data => {
-        this.router.navigate(['main'])
+        this.router.navigate(['main/dashboard'])
         this.spinner.hide();
       }, error => {
         this.spinner.hide();

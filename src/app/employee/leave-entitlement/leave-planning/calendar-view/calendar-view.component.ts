@@ -5,7 +5,7 @@ import listYear from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { APIService } from '$user-root/src/services/shared-service/api.service';
+import { APIService } from '../../../../../../src/services/shared-service/api.service';
 import * as _moment from 'moment';
 import { LeavePlanningAPIService } from '../leave-planning-api.service';
 const moment = _moment;

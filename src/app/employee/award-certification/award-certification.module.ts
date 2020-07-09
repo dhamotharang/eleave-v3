@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { SpinnerModule } from '$user-root/src/library/spinner/spinner.module';
+import { SpinnerModule } from '../../../../src/library/spinner/spinner.module';
 import { AwardCertificationComponent } from './award-certification.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 

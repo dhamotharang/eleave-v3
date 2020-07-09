@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { SpinnerModule } from '$user-root/src/library/spinner/spinner.module';
+import { SpinnerModule } from '../../../../src/library/spinner/spinner.module';
 import { UpdatePasswordComponent } from './update-password.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';

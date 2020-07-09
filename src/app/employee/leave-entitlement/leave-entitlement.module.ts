@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import { SpinnerModule } from '$user-root/src/library/spinner/spinner.module';
+import { SpinnerModule } from '../../../../src/library/spinner/spinner.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { LeavePlanningComponent } from './leave-planning/leave-planning.component';
@@ -39,7 +39,7 @@ const routes: Routes = [
     IonicModule,
     InlineSVGModule,
     MatTabsModule,
-    BrowserModule,
+    // BrowserModule,
     FullCalendarModule,
     MatInputModule,
     MatSelectModule,

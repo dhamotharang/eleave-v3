@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from '$user-root/src/services/shared-service/guards/auth-guard.service';
+import { AuthGuard } from '../../../src/services/shared-service/guards/auth-guard.service';
 import { SideMenuNavigationComponent } from './side-menu-navigation.component';
 import { EmployeeSetupComponent } from '../employee/employee-setup.component';
 import { PageNotFoundComponent } from '../page-not-found.component';
@@ -19,7 +19,7 @@ export const sideMenuNavigationRoutes: Routes = [
         component: SideMenuNavigationComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            // { path: '', redirectTo: 'dash', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'plan-my-leave', component: LeavePlanningComponent },
             {
@@ -41,6 +41,11 @@ export const sideMenuNavigationRoutes: Routes = [
                 ]
             }
         ]
+    },
+    {
+        path: 'tryadmin',
+        loadChildren: () => import('../../../../eLeave_admin-V3/src/app/app.module').then(m => m.App2SharedModule)
     }
+
 ];
 

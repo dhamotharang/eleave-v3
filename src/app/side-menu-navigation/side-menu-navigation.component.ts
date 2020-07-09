@@ -24,7 +24,7 @@ export interface ISideMenu {
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
-import { APIService } from '$user-root/src/services/shared-service/api.service';
+import { APIService } from '../../../src/services/shared-service/api.service';
 import { SharedService } from '../employee/shared.service';
 import { RouteDialogComponent } from '../employee/route-dialog/route-dialog.component';
 import { filter } from 'rxjs/operators';
@@ -90,22 +90,22 @@ export class SideMenuNavigationComponent implements OnInit {
   public appPages: ISideMenu[] = [
     {
       title: 'Dashboard',
-      url: '/main/dashboard',
+      url: 'main/dashboard',
       icon: 'icon_dashboard@3x.png'
     },
     {
       title: 'Profile',
-      url: '/main/profile',
+      url: 'main/profile',
       icon: 'icon_customers@3x.png'
     },
     {
       title: 'Plan My Leave',
-      url: '/main/plan-my-leave',
+      url: 'main/plan-my-leave',
       icon: 'icon_calendar@3x.png'
     },
     {
       title: 'Employee',
-      url: '/main/employee-directory',
+      url: 'main/employee-directory',
       icon: 'icon_persons@3x.png'
     }
   ];

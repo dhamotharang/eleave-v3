@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { APIService } from '$user-root/src/services/shared-service/api.service';
+import { APIService } from '../../../../src/services/shared-service/api.service';
 import { AccountSettingAPIService } from './account-setting-api.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { AuthService } from '$user-root/src/services/shared-service/auth.service';
+import { AuthService } from '../../../../src/services/shared-service/auth.service';
 import { SnackbarNotificationComponent } from '../snackbar-notification/snackbar-notification.component';
 
 /**

@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmploymentDetailsComponent } from './employment-details.component';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { SpinnerModule } from '$user-root/src/library/spinner/spinner.module';
+import { SpinnerModule } from '../../../../src/library/spinner/spinner.module';
 import { MatInputModule } from '@angular/material';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 

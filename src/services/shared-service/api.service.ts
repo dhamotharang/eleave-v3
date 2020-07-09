@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService } from 'angular-web-storage';
 import { AuthService } from './auth.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { environment } from '$user-root/src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 /**
  * Store all API used in employee folder

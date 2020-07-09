@@ -13,7 +13,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { SpinnerModule } from '$user-root/src/library/spinner/spinner.module';
+import { SpinnerModule } from '../../../../src/library/spinner/spinner.module';
 import { EmployeeDirectoryComponent } from './employee-directory.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';

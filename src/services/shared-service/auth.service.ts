@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '$user-root/src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 /**
  * authenticate service

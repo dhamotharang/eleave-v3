@@ -10,7 +10,7 @@ import { PersonalDetailsModule } from './personal-details/personal-details.modul
 import { EmploymentDetailsModule } from './employment-details/employment-details.module';
 import { LeaveEntitlementModule } from './leave-entitlement/leave-entitlement.module';
 import { EmployeeDirectoryModule } from './employee-directory/employee-directory.module';
-import { AuthGuard } from '$user-root/src/services/shared-service/guards/auth-guard.service';
+import { AuthGuard } from '../../../src/services/shared-service/guards/auth-guard.service';
 import { EmployeeSetupComponent } from './employee-setup.component';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { AccountSettingModule } from './account-setting/account-setting.module';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { APIService } from "$user-root/src/services/shared-service/api.service";
+import { APIService } from "../../../../src/services/shared-service/api.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { EditModeDialogComponent } from "../edit-mode-dialog/edit-mode-dialog.component";
 import { SharedService } from "../shared.service";

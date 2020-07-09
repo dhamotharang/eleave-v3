@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIService } from '$user-root/src/services/shared-service/api.service';
+import { APIService } from '../../../../../src/services/shared-service/api.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarNotificationComponent } from '../../snackbar-notification/snackbar-notification.component';
 

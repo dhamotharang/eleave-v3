@@ -23,7 +23,7 @@ export interface ISubSideMenu {
 
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { APIService } from '$user-root/src/services/shared-service/api.service';
+import { APIService } from '../../../src/services/shared-service/api.service';
 import { filter } from 'rxjs/operators';
 import { SharedService } from './shared.service';
 import { RouteDialogComponent } from './route-dialog/route-dialog.component';
