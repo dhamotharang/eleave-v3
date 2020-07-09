@@ -102,8 +102,8 @@ webpack                           4.28.4
 
 
 # Environment variable
-PORT = 8101
 API_URL =  https://appcore.beesuite.app
 FORGET_PASS_URL = https://resetpassword.beesuite.app
+ADMIN_URL = https://admin.beesuite.app
 
 ```
