@@ -28,7 +28,6 @@ import { APIService } from '../../../src/services/shared-service/api.service';
 import { SharedService } from '../employee/shared.service';
 import { RouteDialogComponent } from '../employee/route-dialog/route-dialog.component';
 import { filter } from 'rxjs/operators';
-import { environment } from '../../../src/environments/environment';
 /**
  * Side Menu Navigation Component
  * @export
@@ -217,10 +216,6 @@ export class SideMenuNavigationComponent implements OnInit {
         panelClass: 'custom-dialog-container'
       });
     }
-  }
-
-  routeTo(){
-    window.location.href = environment.ADMIN_URL;
   }
 
   /**
