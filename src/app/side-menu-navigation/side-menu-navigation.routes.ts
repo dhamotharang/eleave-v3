@@ -41,11 +41,6 @@ export const sideMenuNavigationRoutes: Routes = [
                 ]
             }
         ]
-    },
-    {
-        path: 'tryadmin',
-        loadChildren: () => import('../../../../eLeave_admin-V3/src/app/app.module').then(m => m.App2SharedModule)
     }
-
 ];
 
