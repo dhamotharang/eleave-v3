@@ -43,7 +43,7 @@
             src="assets/icon/top_header/Path 26@3x.png" style="width: 8px;height: 5px;float: right;"></div>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="router.navigate(['/main/profile']);">My Profile</button>
-          <button mat-menu-item (click)="router.navigate(['/tryadmin']);">Admin Profile</button>
+          <button mat-menu-item (click)="router.navigate(['/administration']);">Admin Profile</button>
           <button mat-menu-item (click)="logout($event)">Logout</button>
         </mat-menu>
         <ion-label class="labelName" *ngIf="personalList">
@@ -104,7 +104,7 @@
             src="assets/icon/top_header/Path 26@3x.png" style="width: 8px;height: 5px;float: right;"></div>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="router.navigate(['/main/profile']);">My Profile</button>
-          <button mat-menu-item (click)="router.navigate(['/tryadmin']);">Admin Profile</button>
+          <button mat-menu-item (click)="router.navigate(['/administration']);">Admin Profile</button>
           <button mat-menu-item (click)="logout($event)">Logout</button>
         </mat-menu>
         <ion-label class="labelName" *ngIf="personalList" [matMenuTriggerFor]="menu">
