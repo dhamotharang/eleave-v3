@@ -19,7 +19,7 @@ export const sideMenuNavigationRoutes: Routes = [
         component: SideMenuNavigationComponent,
         canActivate: [AuthGuard],
         children: [
-            // { path: '', redirectTo: 'dash', pathMatch: 'full' },
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'plan-my-leave', component: LeavePlanningComponent },
             {
