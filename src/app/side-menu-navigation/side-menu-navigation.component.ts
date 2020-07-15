@@ -83,6 +83,13 @@ export class SideMenuNavigationComponent implements OnInit {
   public url: any;
 
   /**
+   * show admin profile navigation on dropdown menu
+   * @type {boolean}
+   * @memberof SideMenuNavigationComponent
+   */
+  public showAdmin: string;
+
+  /**
    * This is local property to show list of menu, url & icon name
    * @type {ISideMenu[]}
    * @memberof SideMenuNavigationComponent
@@ -172,6 +179,7 @@ export class SideMenuNavigationComponent implements OnInit {
    * @memberof SideMenuNavigationComponent
    */
   ngOnInit() {
+    this.showAdmin  = localStorage.getItem('view_admin');
     this.getRoute(this.router.url);
     this.openAtBeginning();
     this.apiService.get_personal_details().subscribe(data => {

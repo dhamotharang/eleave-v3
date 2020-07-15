@@ -167,8 +167,9 @@ export class LoginComponent implements OnInit {
     this._auth.session.set('email', email);
     this._auth.login(email, password)
       .subscribe(data => {
-        this.router.navigate(['main'])
+        this.router.navigate(['main']);
         this.spinner.hide();
+        localStorage.setItem('view_admin', data.admin_profile.value)
       }, error => {
         this.spinner.hide();
         alert(error.message);
