@@ -179,7 +179,7 @@ export class SideMenuNavigationComponent implements OnInit {
    * @memberof SideMenuNavigationComponent
    */
   ngOnInit() {
-    this.showAdmin  = localStorage.getItem('view_admin');
+    this.showAdmin = localStorage.getItem('view_admin');
     this.getRoute(this.router.url);
     this.openAtBeginning();
     this.apiService.get_personal_details().subscribe(data => {
@@ -232,6 +232,7 @@ export class SideMenuNavigationComponent implements OnInit {
    */
   openAtBeginning() {
     if (this.displayFullMenu === true) {
+      this.expandMenu();
       this.menu.open('first');
       this.onResize();
     }
