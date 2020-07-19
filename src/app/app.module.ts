@@ -17,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { SideMenuNavigationModule } from './side-menu-navigation/side-menu-navigation.module';
 import { LoginModule } from './login/login.module';
-import { App2SharedModule } from '../../../eLeave_admin-V3/src/app/app.module';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { CommonModule } from '@angular/common';
     SideMenuNavigationModule,
     EmployeeSetupPageModule,
     HttpClientModule,
-    App2SharedModule
   ],
   providers: [
     StatusBar,
@@ -44,3 +42,20 @@ import { CommonModule } from '@angular/common';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+const provider = [
+  StatusBar,
+  SplashScreen,
+  XmlJson,
+  { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+];
+
+@NgModule({})
+export class App1SharedModule{
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AppModule,
+      providers: provider
+    }
+  }
+}
