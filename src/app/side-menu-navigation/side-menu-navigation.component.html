@@ -74,7 +74,7 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="router.navigate(['/main/profile']);">My Profile</button>
           <button mat-menu-item *ngIf="showAdmin === 'true'" (click)="router.navigate(['/administration'])">Admin
-            Profile</button>
+            Dashboard</button>
           <button mat-menu-item (click)="logout($event)">Logout</button>
         </mat-menu>
         <ion-label class="labelName" *ngIf="personalList">
