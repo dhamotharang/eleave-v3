@@ -82,6 +82,10 @@ export class SideMenuNavigationComponent implements OnInit {
    */
   public url: any;
 
+  public image: string = "assets/icon/beesuite.png";
+
+  public imageName:string;
+
   /**
    * show admin profile navigation on dropdown menu
    * @type {boolean}
@@ -157,6 +161,7 @@ export class SideMenuNavigationComponent implements OnInit {
   constructor(private menu: MenuController, private router: Router,
     private apiService: APIService, private sharedService: SharedService
   ) {
+    this.imageName = this.image.substring(this.image.lastIndexOf('/') + 1).split('.')[0];
     router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -290,7 +295,8 @@ export class SideMenuNavigationComponent implements OnInit {
    * @memberof SideMenuNavigationComponent
    */
   logout(event) {
-    window.location.href = '/login';
+    // window.location.href = '/login';
+    this.router.navigate(['/']);
     localStorage.clear();
   }
 
