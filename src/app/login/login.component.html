@@ -111,7 +111,7 @@
             formControlName="pass" autocomplete="new-password" required
             (keyup.enter)="signIn(emailInput.value, passwordInput.value)">
           <mat-error *ngIf="formGroupValidation.controls['pass'].invalid">{{getPassErrorMessage()}}</mat-error>
-          <mat-icon class="showHidePassword" matSuffix>
+          <mat-icon class="showHidePassword" style="color: var(--ion-color-light);" matSuffix>
             <ion-icon name="eye-off" (click)="showPasswordKey()" *ngIf="!showPassword"></ion-icon>
             <ion-icon name="eye" (click)="hidePasswordKey()" *ngIf="showPassword"></ion-icon>
           </mat-icon>
