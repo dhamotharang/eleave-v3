@@ -106,6 +106,14 @@
     background-color: #e9e9f0;
     color: #a3a6b4;
   }
+  ::ng-deep .fc-content{
+    color:white;
+    cursor: default;
+  }
+  ::ng-deep .fc-content:hover{
+    color:white;
+    cursor: default;
+  }
   ::ng-deep .fc-more {
     color: #43425d;
   }

@@ -144,9 +144,6 @@ export class EmploymentDetailsComponent implements OnInit {
                 this.showContent = true;
                 this.apiService.get_profile_pic('all').subscribe(data => {
                     this.reportingUrl = data;
-                    if (this.reportingUrl.details.some(person => !(person.FULLNAME === this.list.employmentDetail.reportingTo))) {
-                        this.svNotFound = true;
-                    }
                 })
             },
             error => {
