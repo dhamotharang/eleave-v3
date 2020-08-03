@@ -162,6 +162,13 @@ export class DashboardComponent implements OnInit {
     public expiredDate: any;
 
     /**
+     * get today's date
+     * @type {Date}
+     * @memberof DashboardComponent
+     */
+    public todayDate: Date;
+
+    /**
      * reason value get from confirmation pop up
      * @private
      * @type {string}
@@ -203,6 +210,7 @@ export class DashboardComponent implements OnInit {
      * @memberof DashboardComponent
      */
     ngOnInit() {
+        this.todayDate = new Date();
         this.dashboardAPI.get_birthday_details().subscribe(data => {
             this.birthdayDetail = data;
             this.row = true;
@@ -288,6 +296,13 @@ export class DashboardComponent implements OnInit {
             this.annualDaysToGo = this.calculateDays(this.annualVal.YEAR);
             this.dashboardAPI.get_user_application_status(this.annualVal.USER_GUID).subscribe(val => {
                 this.applicationStatus = val;
+                for (let i = 0; i < this.applicationStatus.length; i++) {
+                    if (new Date(this.applicationStatus[i].startDate) > this.todayDate) {
+                        this.applicationStatus[i]["allowPopUpCancel"] = true;
+                    } else {
+                        this.applicationStatus[i]["allowPopUpCancel"] = false;
+                    }
+                }
             })
         })
         this.dashboardAPI.get_medical_leave().subscribe(details => {

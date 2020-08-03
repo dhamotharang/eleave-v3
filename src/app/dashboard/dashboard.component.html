@@ -410,8 +410,8 @@
                                     <ion-col style="color: #4d4f5c;font-size: 11px;text-align: right;"
                                         align-self-center>
                                         <mat-chip-list>
-                                            <mat-chip style="cursor: pointer;"
-                                                (click)="item.status !== 'CANCELLED'? openStatusDialog(item): ''"
+                                            <mat-chip [style.cursor]="(item.status !== 'CANCELLED' && item.allowPopUpCancel === true) ? 'pointer' : 'default'"
+                                                (click)="(item.status !== 'CANCELLED' && item.allowPopUpCancel === true) ? openStatusDialog(item) : '' "
                                                 [ngClass]="{
                                             'approvedColor': item.status == 'APPROVED','rejectColor': item.status == 'REJECTED', 'cancelColor': item.status == 'CANCELLED', 'pendingColor': item.status == 'PENDING'}">
 
