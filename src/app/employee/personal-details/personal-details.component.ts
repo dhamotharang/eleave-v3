@@ -81,13 +81,6 @@ export class PersonalDetailsComponent implements OnInit {
     public showContent: boolean = false;
 
     /**
-     * Local property to show or hide edit profile
-     * @type {boolean}
-     * @memberof PersonalDetailsComponent
-     */
-    public showEditProfile: boolean = false;
-
-    /**
      * Object format of emergency contact
      * @memberof PersonalDetailsComponent
      */
@@ -147,6 +140,13 @@ export class PersonalDetailsComponent implements OnInit {
     public url: any;
 
     /**
+     * click to save data
+     * @type {boolean}
+     * @memberof PersonalDetailsComponent
+     */
+    public isBlur: boolean = false;
+
+    /**
      *Creates an instance of PersonalDetailsComponent.
      * @param {APIService} apiService
      * @param {SharedService} sharedService
@@ -204,7 +204,9 @@ export class PersonalDetailsComponent implements OnInit {
             });
         } else {
             this.modeValue = 'OFF'
-            this.patchData();
+            if (this.isBlur === true) {
+                this.patchData();
+            }
         }
         this.sharedService.emitChange(this.modeValue);
     }
@@ -327,7 +329,7 @@ export class PersonalDetailsComponent implements OnInit {
      * @memberof PersonalDetailsComponent
      */
     patchData() {
-        this.showEditProfile = false;
+        this.isBlur = false;
         this.items.personalDetail.nric = this.items.personalDetail.nric.toString();
         this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('YYYY-MM-DD');
         this.apiService.patch_user_info_personal_id(this.data(), this.items.id).subscribe(

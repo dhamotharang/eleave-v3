@@ -201,14 +201,14 @@
                             <ion-label>Religion</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.religion}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.religion">
+                                <input matInput [(ngModel)]="items.personalDetail.religion" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
                             <ion-label>Marital Status</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.maritalStatus}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <mat-select [(value)]="items.personalDetail.maritalStatus">
+                                <mat-select [(value)]="items.personalDetail.maritalStatus" (blur)="isBlur = true">
                                     <mat-option value="Single">Single</mat-option>
                                     <mat-option value="Married">Married</mat-option>
                                 </mat-select>
@@ -224,7 +224,7 @@
                             <ion-label>Personal Email Address</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.emailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.emailAddress">
+                                <input matInput [(ngModel)]="items.personalDetail.emailAddress" (blur)="isBlur = true">
                             </mat-form-field>
 
                         </ion-col>
@@ -235,7 +235,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.workEmailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.workEmailAddress">
+                                <input matInput [(ngModel)]="items.personalDetail.workEmailAddress" (blur)="isBlur = true">
                             </mat-form-field>
 
                         </ion-col>
@@ -244,7 +244,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.phoneNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.phoneNumber">
+                                <input matInput [(ngModel)]="items.personalDetail.phoneNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -252,7 +252,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.workPhoneNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.workPhoneNumber">
+                                <input matInput [(ngModel)]="items.personalDetail.workPhoneNumber" (blur)="isBlur = true">
                             </mat-form-field>
                             <!-- <ion-label>NRIC</ion-label>
                                 <p >{{items.personalDetail.nric}}</p> -->
@@ -293,6 +293,9 @@
                         <ion-col>
                             <ion-label>Religion</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.religion}}</p>
+                            <mat-form-field *ngIf="modeValue === 'ON'">
+                                <input matInput [(ngModel)]="items.personalDetail.religion" (blur)="isBlur = true">
+                            </mat-form-field>
                         </ion-col>
                     </ion-row>
                     <ion-row class="detailsRow" style="flex-flow: nowrap;">
@@ -300,7 +303,7 @@
                             <ion-label>Marital Status</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.maritalStatus}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <mat-select [(value)]="items.personalDetail.maritalStatus">
+                                <mat-select [(value)]="items.personalDetail.maritalStatus" (blur)="isBlur = true">
                                     <mat-option value="Single">Single</mat-option>
                                     <mat-option value="Married">Married</mat-option>
                                 </mat-select>
@@ -310,7 +313,7 @@
                             <ion-label>Personal Email Address</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.emailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.emailAddress">
+                                <input matInput [(ngModel)]="items.personalDetail.emailAddress" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
@@ -320,7 +323,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.workEmailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.workEmailAddress">
+                                <input matInput [(ngModel)]="items.personalDetail.workEmailAddress" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -328,7 +331,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.phoneNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.phoneNumber">
+                                <input matInput [(ngModel)]="items.personalDetail.phoneNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
@@ -338,7 +341,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="white-space: nowrap;">
                                 {{items.personalDetail.workPhoneNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="items.personalDetail.workPhoneNumber">
+                                <input matInput [(ngModel)]="items.personalDetail.workPhoneNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
@@ -355,36 +358,36 @@
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">
                             {{items.personalDetail.address1}},</p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="Address line 1" [(ngModel)]="items.personalDetail.address1">
+                            <input matInput placeholder="Address line 1" [(ngModel)]="items.personalDetail.address1" (blur)="isBlur = true">
                         </mat-form-field>
                         &nbsp;
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">
                             {{items.personalDetail.address2}},</p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="Address line 2" [(ngModel)]="items.personalDetail.address2">
+                            <input matInput placeholder="Address line 2" [(ngModel)]="items.personalDetail.address2" (blur)="isBlur = true">
                         </mat-form-field>
                         &nbsp;
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">{{items.personalDetail.postcode}},
                         </p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="Postcode" [(ngModel)]="items.personalDetail.postcode">
+                            <input matInput placeholder="Postcode" [(ngModel)]="items.personalDetail.postcode" (blur)="isBlur = true">
                         </mat-form-field>
                         &nbsp;
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">{{items.personalDetail.city}},</p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="City" [(ngModel)]="items.personalDetail.city">
+                            <input matInput placeholder="City" [(ngModel)]="items.personalDetail.city" (blur)="isBlur = true">
                         </mat-form-field>
                         &nbsp;
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">{{items.personalDetail.state}},
                         </p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="State" [(ngModel)]="items.personalDetail.state">
+                            <input matInput placeholder="State" [(ngModel)]="items.personalDetail.state" (blur)="isBlur = true">
                         </mat-form-field>
                         &nbsp;
                         <p *ngIf="modeValue === 'OFF'" style="display: inline">{{items.personalDetail.country}}.
                         </p>
                         <mat-form-field *ngIf="modeValue === 'ON'">
-                            <input matInput placeholder="Country" [(ngModel)]="items.personalDetail.country">
+                            <input matInput placeholder="Country" [(ngModel)]="items.personalDetail.country" (blur)="isBlur = true">
                         </mat-form-field>
                     </ion-col>
                 </ion-row>
@@ -406,7 +409,7 @@
                                     {{item.contactName}}</p>
                                 <mat-form-field *ngIf="modeValue === 'ON'">
                                     <input matInput placeholder="Contact Name"
-                                        [(ngModel)]="removeItems[index].contactName">
+                                        [(ngModel)]="removeItems[index].contactName" (blur)="isBlur = true">
                                 </mat-form-field>
                             </ion-col>
                             <ion-col>
@@ -415,7 +418,7 @@
                                     {{item.contactRelationship}}</p>
                                 <mat-form-field *ngIf="modeValue === 'ON'">
                                     <input matInput placeholder="Contact Relationship"
-                                        [(ngModel)]="removeItems[index].contactRelationship">
+                                        [(ngModel)]="removeItems[index].contactRelationship" (blur)="isBlur = true">
                                 </mat-form-field>
                             </ion-col>
                             <ion-col>
@@ -424,7 +427,7 @@
                                     {{item.contactNumber}}</p>
                                 <mat-form-field *ngIf="modeValue === 'ON'">
                                     <input matInput placeholder="Contact Number"
-                                        [(ngModel)]="removeItems[index].contactNumber">
+                                        [(ngModel)]="removeItems[index].contactNumber" (blur)="isBlur = true">
                                 </mat-form-field>
                                 <!-- <div class="delete-icon" *ngIf="showEditProfile"
                                     [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, removeItems)">
@@ -450,7 +453,7 @@
                             <ion-col>
                                 <div class="delete-icon" *ngIf="modeValue === 'ON'"
                                     [inlineSVG]="'assets/icon/option/trash.svg'"
-                                    (click)="removeItem(index, removeItems)">
+                                    (click)="removeItem(index, removeItems)" >
                                 </div>
                             </ion-col>
                         </ion-row>
@@ -467,7 +470,7 @@
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field style="width: 100%;">
                                         <input matInput placeholder="Contact Name"
-                                            [(ngModel)]="removeItems[index].contactName">
+                                            [(ngModel)]="removeItems[index].contactName" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -481,7 +484,7 @@
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
                                         <input matInput placeholder="Contact Relationship"
-                                            [(ngModel)]="removeItems[index].contactRelationship">
+                                            [(ngModel)]="removeItems[index].contactRelationship" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -495,7 +498,7 @@
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
                                         <input matInput placeholder="Contact Number"
-                                            [(ngModel)]="removeItems[index].contactNumber">
+                                            [(ngModel)]="removeItems[index].contactNumber" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -533,7 +536,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="display: inline">
                                 {{item.spouseName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput placeholder="Spouse Name" [(ngModel)]="spouseItems[index].spouseName">
+                                <input matInput placeholder="Spouse Name" [(ngModel)]="spouseItems[index].spouseName" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -542,7 +545,7 @@
                                 {{item.spouseIdentificationNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <input matInput placeholder="Identity card Number"
-                                    [(ngModel)]="spouseItems[index].spouseIdentificationNumber">
+                                    [(ngModel)]="spouseItems[index].spouseIdentificationNumber" (blur)="isBlur = true">
                             </mat-form-field>
                             <!-- <div class="delete-icon" *ngIf="showEditProfile"
                                 [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, spouseItems)">
@@ -587,7 +590,7 @@
                             <p *ngIf="modeValue === 'OFF'" style="display: inline">
                                 {{item.childName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput placeholder="Child Name" [(ngModel)]="childItems[index].childName">
+                                <input matInput placeholder="Child Name" [(ngModel)]="childItems[index].childName" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -596,7 +599,7 @@
                                 {{item.childIdentificationNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <input matInput placeholder="Identity card Number"
-                                    [(ngModel)]="childItems[index].childIdentificationNumber">
+                                    [(ngModel)]="childItems[index].childIdentificationNumber" (blur)="isBlur = true">
                             </mat-form-field>
                             <!-- <div class="delete-icon" *ngIf="showEditProfile"
                                 [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, childItems)">
@@ -664,28 +667,28 @@
                                 {{item.qualificationLevel}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
                                 <input matInput placeholder="Education Level"
-                                    [(ngModel)]="eduList[index].qualificationLevel">
+                                    [(ngModel)]="eduList[index].qualificationLevel" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col size="3">
                             <p *ngIf="modeValue === 'OFF'">
                                 {{item.major}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
-                                <input matInput placeholder="Major" [(ngModel)]="eduList[index].major">
+                                <input matInput placeholder="Major" [(ngModel)]="eduList[index].major" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col size="3">
                             <p *ngIf="modeValue === 'OFF'">
                                 {{item.university}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
-                                <input matInput placeholder="University" [(ngModel)]="eduList[index].university">
+                                <input matInput placeholder="University" [(ngModel)]="eduList[index].university" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col size="2">
                             <p *ngIf="modeValue === 'OFF'">
                                 {{item.year}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'" style="width: 100%;">
-                                <input matInput placeholder="Year" [(ngModel)]="eduList[index].year">
+                                <input matInput placeholder="Year" [(ngModel)]="eduList[index].year" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col size="1">
@@ -735,7 +738,7 @@
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field style="width: 100%;">
                                         <input matInput placeholder="Education Level"
-                                            [(ngModel)]="eduList[index].qualificationLevel">
+                                            [(ngModel)]="eduList[index].qualificationLevel" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -746,7 +749,7 @@
                                     {{item.major}}</ion-col>
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field style="width: 100%;">
-                                        <input matInput placeholder="Major" [(ngModel)]="eduList[index].major">
+                                        <input matInput placeholder="Major" [(ngModel)]="eduList[index].major" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -759,7 +762,7 @@
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field style="width: 100%;">
                                         <input matInput placeholder="University"
-                                            [(ngModel)]="eduList[index].university">
+                                            [(ngModel)]="eduList[index].university" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>
@@ -770,7 +773,7 @@
                                     {{item.year}}</ion-col>
                                 <ion-col *ngIf="modeValue === 'ON'">
                                     <mat-form-field style="width: 100%;">
-                                        <input matInput placeholder="Year" [(ngModel)]="eduList[index].year">
+                                        <input matInput placeholder="Year" [(ngModel)]="eduList[index].year" (blur)="isBlur = true">
                                     </mat-form-field>
                                 </ion-col>
                             </ion-row>

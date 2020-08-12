@@ -79,6 +79,8 @@ export class AwardCertificationComponent implements OnInit {
      */
     public url: any;
 
+    public isBlur: boolean = false;
+
     /**
      * validation group of file
      * @private
@@ -154,7 +156,9 @@ export class AwardCertificationComponent implements OnInit {
             });
         } else {
             this.toggleValue = 'OFF'
-            this.updateCertificate();
+            if (this.isBlur === true) {
+                this.updateCertificate();
+            }
         }
         this.sharedService.emitChange(this.toggleValue);
     }
@@ -181,6 +185,7 @@ export class AwardCertificationComponent implements OnInit {
      * @memberof AwardCertificationComponent
      */
     updateCertificate(index?: number) {
+        this.isBlur = false;
         const body = this.items.personalDetail;
         body['id'] = this.items.id;
         body.nric = this.items.personalDetail.nric.toString();
