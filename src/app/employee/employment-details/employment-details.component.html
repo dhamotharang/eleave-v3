@@ -346,7 +346,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Bank Account Name</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -354,7 +354,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Bank Account No</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -362,7 +362,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.epfNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>EPF No</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.epfNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.epfNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col></ion-col>
@@ -373,7 +373,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.incomeTaxNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Income Tax No</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -389,14 +389,14 @@
                             <ion-label>Bank Account Name</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
                             <ion-label>Bank Account No</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
@@ -405,14 +405,14 @@
                             <ion-label>EPF No</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.epfNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.epfNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.epfNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
                             <ion-label>Income Tax No</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.incomeTaxNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber">
+                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>

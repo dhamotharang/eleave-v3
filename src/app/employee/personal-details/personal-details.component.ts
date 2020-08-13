@@ -206,6 +206,8 @@ export class PersonalDetailsComponent implements OnInit {
             this.modeValue = 'OFF'
             if (this.isBlur === true) {
                 this.patchData();
+            } else {
+                this.notification('Edit mode disabled. Good job!', true);
             }
         }
         this.sharedService.emitChange(this.modeValue);

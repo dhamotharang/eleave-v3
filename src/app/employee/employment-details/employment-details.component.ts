@@ -98,6 +98,8 @@ export class EmploymentDetailsComponent implements OnInit {
      */
     public reportingUrl: any;
 
+    public isBlur: boolean = false;
+
     /**
      * supervisor not found in profile picture list 
      * @type {boolean}
@@ -174,7 +176,11 @@ export class EmploymentDetailsComponent implements OnInit {
             this._scrollToService.scrollTo(config);
         } else {
             this.modeValue = 'OFF'
-            this.patchEmployment();
+            if (this.isBlur === true) {
+                this.patchEmployment();
+            } else {
+                this.snackbarMsg('Edit mode disabled. Good job!', true);
+            }
         }
         this.sharedService.emitChange(this.modeValue);
     }
@@ -184,6 +190,7 @@ export class EmploymentDetailsComponent implements OnInit {
      * @memberof EmploymentDetailsComponent
      */
     async patchEmployment() {
+        this.isBlur = false;
         const body = this.list.employmentDetail;
         body["id"] = this.list.id;
         body.employmentStatus = body.employmentStatus;

@@ -158,6 +158,8 @@ export class AwardCertificationComponent implements OnInit {
             this.toggleValue = 'OFF'
             if (this.isBlur === true) {
                 this.updateCertificate();
+            } else {
+                this.msgNotification('Edit mode disabled. Good job!', true);
             }
         }
         this.sharedService.emitChange(this.toggleValue);
