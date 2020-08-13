@@ -238,7 +238,9 @@
     <div class="row" *ngIf="row">
         <span style="display: flex; flex-flow: wrap; flex: 1;margin-top: 20px;">
             <div class="annual">
-                <p style="color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;font-size: 12px;padding-top: 16px;">Annual Leave
+                <p
+                    style="color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;font-size: 12px;padding-top: 16px;">
+                    Annual Leave
                 </p>
                 <span style="display: flex; justify-content: space-between; min-width: auto;">
                     <ion-label *ngIf="annualVal"
@@ -259,7 +261,9 @@
                     Details</p>
             </div>
             <div class="replacement">
-                <p style="color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;font-size: 12px;padding-top: 16px;">Replacement
+                <p
+                    style="color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;font-size: 12px;padding-top: 16px;">
+                    Replacement
                     Leave
                 </p>
                 <ion-label *ngIf="replaceVal>-1"
@@ -280,7 +284,9 @@
                     Details</p>
             </div>
             <div class="medical">
-                <p style="font-size: 12px;color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;padding-top: 16px;">Medical Leave
+                <p
+                    style="font-size: 12px;color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;padding-top: 16px;">
+                    Medical Leave
                 </p>
                 <ion-label *ngIf="medicalVal>-1"
                     style="float: left;font-size: 35px;color: #43425d;font-weight: bold;line-height: 1.26;">
@@ -291,13 +297,19 @@
                     margin-bottom: 0;width: 100%;">Days Available</p>
             </div>
             <div class="birthday" style="position: relative;">
-                <p style="font-size: 12px;color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;padding-top: 16px;">Birthday
+                <p
+                    style="font-size: 12px;color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;padding-top: 16px;">
+                    Birthday
                     Leave
                 </p>
-                <ion-label style="float: left;font-size: 35px;color: #43425d;font-weight: bold;line-height: 1.26;">
+                <ion-label *ngIf="birthdayDetail.day != 'Invalid date'"
+                    style="float: left;font-size: 35px;color: #43425d;font-weight: bold;line-height: 1.26;">
                     {{birthdayDetail.day}} {{birthdayDetail.month}}</ion-label>
+                <ion-label *ngIf="birthdayDetail.day === 'Invalid date'"
+                    style="float: left;font-size: 20px;color: #43425d;font-weight: bold;line-height: 1.26;">
+                    No birthdate</ion-label>
                 <img class="annual-icon" src="assets/icon/dashboard/icon_annual_leave@3x.png">
-                <p style="font-size: 12px;opacity: 0.5;color: #43425d;line-height: 1.25;display: inline-block;
+                <p *ngIf="birthdayDetail.day != 'Invalid date'" style="font-size: 12px;opacity: 0.5;color: #43425d;line-height: 1.25;display: inline-block;
                         margin-bottom: 0;width: 100%;">{{birthdayDetail.remainingDays}} </p>
             </div>
         </span>
@@ -410,7 +422,8 @@
                                     <ion-col style="color: #4d4f5c;font-size: 11px;text-align: right;"
                                         align-self-center>
                                         <mat-chip-list>
-                                            <mat-chip [style.cursor]="(item.status !== 'CANCELLED' && item.allowPopUpCancel === true) ? 'pointer' : 'default'"
+                                            <mat-chip
+                                                [style.cursor]="(item.status !== 'CANCELLED' && item.allowPopUpCancel === true) ? 'pointer' : 'default'"
                                                 (click)="(item.status !== 'CANCELLED' && item.allowPopUpCancel === true) ? openStatusDialog(item) : '' "
                                                 [ngClass]="{
                                             'approvedColor': item.status == 'APPROVED','rejectColor': item.status == 'REJECTED', 'cancelColor': item.status == 'CANCELLED', 'pendingColor': item.status == 'PENDING'}">
