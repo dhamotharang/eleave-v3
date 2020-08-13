@@ -158,7 +158,7 @@ export class SideMenuNavigationComponent implements OnInit {
    * @param {APIService} apiService
    * @memberof SideMenuNavigationComponent
    */
-  constructor(private menu: MenuController, private router: Router,
+  constructor(private menu: MenuController, public router: Router,
     private apiService: APIService, private sharedService: SharedService
   ) {
     this.imageName = this.image.substring(this.image.lastIndexOf('/') + 1).split('.')[0];
