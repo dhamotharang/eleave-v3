@@ -197,9 +197,15 @@ export class EmploymentDetailsComponent implements OnInit {
         body.employeeId = body.employeeId.toString();
         body.incomeTaxNumber = body.incomeTaxNumber.toString();
         body.bankAccountNumber = body.bankAccountNumber.toString();
-        body.dateOfConfirmation = moment(body.dateOfConfirmation).format('YYYY-MM-DD');
-        body.dateOfJoin = moment(body.dateOfJoin).format('YYYY-MM-DD');
-        body.dateOfResignation = moment(body.dateOfResignation).format('YYYY-MM-DD');
+        if (body.dateOfConfirmation != '') {
+            body.dateOfConfirmation = moment(body.dateOfConfirmation).format('YYYY-MM-DD');
+        }
+        if (body.dateOfJoin != '') {
+            body.dateOfJoin = moment(body.dateOfJoin).format('YYYY-MM-DD');
+        }
+        if (body.dateOfResignation != '') {
+            body.dateOfResignation = moment(body.dateOfResignation).format('YYYY-MM-DD');
+        }
         let list = await this.apiService.get_user_profile_list().toPromise();
         list.filter(item => {
             if (item.employeeName === body.reportingTo) {
@@ -219,7 +225,7 @@ export class EmploymentDetailsComponent implements OnInit {
             });
         },
             err => {
-                this.snackbarMsg(JSON.parse(err._body).status, false);
+                this.snackbarMsg(JSON.parse(err._body).message[0].constraints.isNotEmpty, false);
             })
     }
 

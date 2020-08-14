@@ -168,7 +168,9 @@ export class PersonalDetailsComponent implements OnInit {
                 this.showSpinner = false;
                 this.showContent = true;
                 this.firstPicker = new FormControl((this.items.personalDetail.dob), Validators.required);
-                this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('DD-MM-YYYY');
+                if (this.items.personalDetail.dob != '') {
+                    this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('DD-MM-YYYY');
+                }
                 this.initContact();
                 this.initSpouse();
                 this.initChild();
@@ -333,15 +335,16 @@ export class PersonalDetailsComponent implements OnInit {
     patchData() {
         this.isBlur = false;
         this.items.personalDetail.nric = this.items.personalDetail.nric.toString();
-        this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('YYYY-MM-DD');
-        this.apiService.patch_user_info_personal_id(this.data(), this.items.id).subscribe(
+        if (this.items.personalDetail.dob !== '') {
+            this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('YYYY-MM-DD');
+        } this.apiService.patch_user_info_personal_id(this.data(), this.items.id).subscribe(
             (val) => {
                 this.items.personalDetail = val;
                 this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('DD-MM-YYYY');
                 this.notification('Edit mode disabled. Good job!', true);
             },
             response => {
-                this.notification(JSON.parse(response._body).status, false);
+                this.notification(JSON.parse(response._body).message[0].constraints.isNotEmpty, false);
             });
     }
 
@@ -368,7 +371,7 @@ export class PersonalDetailsComponent implements OnInit {
             "workEmailAddress": this.items.personalDetail.workEmailAddress,
             "address1": this.items.personalDetail.address1.toString(),
             "address2": this.items.personalDetail.address2.toString(),
-            "postcode": this.items.personalDetail.postcode,
+            "postcode": Number(this.items.personalDetail.postcode),
             "city": this.items.personalDetail.city,
             "state": this.items.personalDetail.state,
             "country": this.items.personalDetail.country,
