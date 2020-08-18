@@ -214,7 +214,7 @@ export class AwardCertificationComponent implements OnInit {
             this.msgNotification('Edit mode disabled. Good job!', true);
         },
             response => {
-                this.msgNotification(JSON.parse(response._body).status, false);
+                this.msgNotification(JSON.parse(response._body).message[0].constraints.isNotEmpty, false);
             })
     }
 

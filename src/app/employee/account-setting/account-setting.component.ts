@@ -86,8 +86,8 @@ export class AccountSettingComponent implements OnInit {
             if (data !== undefined) {
                 this.accountApi.post_change_password({
                     "loginId": this._email,
-                    "password": data.confirmPass,
-                    "oldPassword": data.currentPass
+                    "password": window.btoa(data.confirmPass),
+                    "oldPassword": window.btoa(data.currentPass)
                 }).subscribe(
                     result => { this.notify(result.message, true) },
                     response => {
