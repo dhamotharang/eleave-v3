@@ -194,6 +194,7 @@ export class EmploymentDetailsComponent implements OnInit {
         const body = this.list.employmentDetail;
         body["id"] = this.list.id;
         body.employmentStatus = body.employmentStatus;
+        body.epfNumber = body.epfNumber.toString();
         body.employeeId = body.employeeId.toString();
         body.incomeTaxNumber = body.incomeTaxNumber.toString();
         body.bankAccountNumber = body.bankAccountNumber.toString();

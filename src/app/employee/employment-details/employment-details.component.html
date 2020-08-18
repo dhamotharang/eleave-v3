@@ -196,7 +196,8 @@
                         </ion-col>
                         <ion-col>
                             <ion-label>Date Of Join</ion-label>
-                            <p style="white-space: nowrap;">
+                            <p *ngIf="personalList.employmentDetail.dateOfJoin !== 'Invalid date'"
+                                style="white-space: nowrap;">
                                 {{personalList.employmentDetail.dateOfJoin | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                         <ion-col></ion-col>
@@ -204,11 +205,13 @@
                     <ion-row class="detailsRow">
                         <ion-col>
                             <ion-label>Confirmation Date</ion-label>
-                            <p>{{personalList.employmentDetail.dateOfConfirmation | date: 'dd-MM-yyyy'}}</p>
+                            <p *ngIf="personalList.employmentDetail.dateOfConfirmation !== 'Invalid date'">
+                                {{personalList.employmentDetail.dateOfConfirmation | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                         <ion-col>
                             <ion-label>Resignation Date</ion-label>
-                            <p>{{personalList.employmentDetail.dateOfResignation | date: 'dd-MM-yyyy'}}</p>
+                            <p *ngIf="personalList.employmentDetail.dateOfResignation !== 'Invalid date'">
+                                {{personalList.employmentDetail.dateOfResignation | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                         <ion-col>
                             <ion-label>Year Of Service</ion-label>
@@ -263,18 +266,21 @@
                         </ion-col>
                         <ion-col>
                             <ion-label>Date Of Join</ion-label>
-                            <p style="white-space: nowrap;">
+                            <p *ngIf="personalList.employmentDetail.dateOfJoin !== 'Invalid date'"
+                                style="white-space: nowrap;">
                                 {{personalList.employmentDetail.dateOfJoin | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
                             <ion-label>Confirmation Date</ion-label>
-                            <p>{{personalList.employmentDetail.dateOfConfirmation | date: 'dd-MM-yyyy'}}</p>
+                            <p *ngIf="personalList.employmentDetail.dateOfConfirmation !== 'Invalid date'">
+                                {{personalList.employmentDetail.dateOfConfirmation | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                         <ion-col>
                             <ion-label>Resignation Date</ion-label>
-                            <p>{{personalList.employmentDetail.dateOfResignation | date: 'dd-MM-yyyy'}}</p>
+                            <p *ngIf="personalList.employmentDetail.dateOfResignation !== 'Invalid date'">
+                                {{personalList.employmentDetail.dateOfResignation | date: 'dd-MM-yyyy'}}</p>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -346,7 +352,8 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Bank Account Name</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -354,7 +361,8 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Bank Account No</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -373,7 +381,8 @@
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.incomeTaxNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <mat-label>Income Tax No</mat-label>
-                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
@@ -389,14 +398,16 @@
                             <ion-label>Bank Account Name</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountName}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountName"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                         <ion-col>
                             <ion-label>Bank Account No</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.bankAccountNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.bankAccountNumber"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
@@ -412,7 +423,8 @@
                             <ion-label>Income Tax No</ion-label>
                             <p *ngIf="modeValue === 'OFF'">{{personalList.employmentDetail.incomeTaxNumber}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
-                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber" (blur)="isBlur = true">
+                                <input matInput [(ngModel)]="list.employmentDetail.incomeTaxNumber"
+                                    (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
