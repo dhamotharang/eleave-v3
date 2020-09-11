@@ -1,12 +1,10 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { DashboardApiService } from './dashboard-api.service';
-import * as _moment from 'moment';
 import { MenuController } from '@ionic/angular';
-import { MatDialog } from '@angular/material';
 import { LeaveApplicationConfirmationComponent } from './leave-application-confirmation/leave-application-confirmation.component';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
-const moment = _moment;
+import { filter } from 'rxjs/operators';
+const dayjs = require('dayjs');
 
 /**
  * Dashboard Page
@@ -364,7 +362,7 @@ export class DashboardComponent implements OnInit {
             this.showSpinner = false;
             for (let i = 0; i < this.holidays.length; i++) {
                 this.holidays[i].day = this.getDayFromDate(new Date(this.holidays[i].start));
-                this.holidays[i].start = (moment(this.holidays[i].start).format('DD MMM YYYY'));
+                this.holidays[i].start = (dayjs(this.holidays[i].start).format('DD MMM YYYY'));
             }
         })
     }

@@ -6,9 +6,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { APIService } from '../../../../../../src/services/shared-service/api.service';
-import * as _moment from 'moment';
 import { LeavePlanningAPIService } from '../leave-planning-api.service';
-const moment = _moment;
+const dayjs = require('dayjs');
 
 /**
  * Calendar View Page
@@ -125,7 +124,7 @@ export class CalendarViewComponent implements OnInit {
      * @memberof CalendarViewComponent
      */
     async getOnLeaveList(date: Date) {
-        this.onLeaveList = await this.leaveAPI.get_calendar_onleave_list({ 'enddate': moment(date).format('YYYY-MM-DD'), 'startdate': moment(date).format('YYYY-MM-DD') }).toPromise();
+        this.onLeaveList = await this.leaveAPI.get_calendar_onleave_list({ 'enddate': dayjs(date).format('YYYY-MM-DD'), 'startdate': dayjs(date).format('YYYY-MM-DD') }).toPromise();
     }
 
     /**
@@ -155,13 +154,13 @@ export class CalendarViewComponent implements OnInit {
     }
 
     /**
-     * format date using moment library
+     * format date using dayjs library
      * @param {*} date
      * @memberof CalendarViewComponent
      */
     editDateFormat(date: any) {
         for (let i = 0; i < date.length; i++) {
-            this.PBList[i].str = (moment(date[i].start).format('DD-MM-YYYY'));
+            this.PBList[i].str = (dayjs(date[i].start).format('DD-MM-YYYY'));
             this.PBList[i].day = this.getWeekDay(new Date(date[i].start));
             this.PBList[i]["backgroundColor"] = "#3b86ff";
             this.PBList[i]["borderColor"] = "#3b86ff";
@@ -176,13 +175,13 @@ export class CalendarViewComponent implements OnInit {
     getEmployeeLeaveList(list: any) {
         for (let i = 0; i < list.length; i++) {
             if (list[i].CODE != undefined) {
-                this.events[i].start = moment(list[i].START_DATE).format("YYYY-MM-DD[T]HH:mm:ss");
-                this.events[i].end = moment(list[i].END_DATE).format("YYYY-MM-DD[T]HH:mm:ss");
+                this.events[i].start = dayjs(list[i].START_DATE).format("YYYY-MM-DD[T]HH:mm:ss");
+                this.events[i].end = dayjs(list[i].END_DATE).format("YYYY-MM-DD[T]HH:mm:ss");
                 this.events[i].title = list[i].FULLNAME + ' ' + '(' + (list[i].CODE) + ')';
                 // this.events[i].allDay = true;
             } else {
-                this.events[i].start = (moment(list[i].start).format('YYYY-MM-DD'));
-                this.events[i].end = moment(list[i].end).format('YYYY-MM-DD');
+                this.events[i].start = (dayjs(list[i].start).format('YYYY-MM-DD'));
+                this.events[i].end = dayjs(list[i].end).format('YYYY-MM-DD');
                 this.events[i].allDay = true;
             }
         }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../../src/services/shared-service/api.service';
 import { ActivatedRoute } from '@angular/router';
-import * as _moment from 'moment';
 import { EditModeDialogComponent } from '../edit-mode-dialog/edit-mode-dialog.component';
 import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
 import { SnackbarNotificationComponent } from '../snackbar-notification/snackbar-notification.component';
 import { SharedService } from '../shared.service';
-const moment = _moment;
+const dayjs = require('dayjs');
 
 /**
  * Employment Details Page
@@ -199,13 +198,13 @@ export class EmploymentDetailsComponent implements OnInit {
         body.incomeTaxNumber = body.incomeTaxNumber.toString();
         body.bankAccountNumber = body.bankAccountNumber.toString();
         if (body.dateOfConfirmation != '') {
-            body.dateOfConfirmation = moment(body.dateOfConfirmation).format('YYYY-MM-DD');
+            body.dateOfConfirmation = dayjs(body.dateOfConfirmation).format('YYYY-MM-DD');
         }
         if (body.dateOfJoin != '') {
-            body.dateOfJoin = moment(body.dateOfJoin).format('YYYY-MM-DD');
+            body.dateOfJoin = dayjs(body.dateOfJoin).format('YYYY-MM-DD');
         }
         if (body.dateOfResignation != '') {
-            body.dateOfResignation = moment(body.dateOfResignation).format('YYYY-MM-DD');
+            body.dateOfResignation = dayjs(body.dateOfResignation).format('YYYY-MM-DD');
         }
         let list = await this.apiService.get_user_profile_list().toPromise();
         list.filter(item => {

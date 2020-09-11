@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../../src/services/shared-service/api.service';
 import { Validators, FormControl } from '@angular/forms';
-import * as _moment from 'moment';
 import { MAT_DATE_FORMATS, DateAdapter } from '@angular/material';
 import { APP_DATE_FORMATS, AppDateAdapter } from '../date.adapter';
 import { EditModeDialogComponent } from '../edit-mode-dialog/edit-mode-dialog.component';
 import { SnackbarNotificationComponent } from '../snackbar-notification/snackbar-notification.component';
 import { SharedService } from '../shared.service';
-const moment = _moment;
+const dayjs = require('dayjs');
 /**
  * Personal Details Page
  * @export
@@ -169,7 +168,7 @@ export class PersonalDetailsComponent implements OnInit {
                 this.showContent = true;
                 this.firstPicker = new FormControl((this.items.personalDetail.dob), Validators.required);
                 if (this.items.personalDetail.dob != '') {
-                    this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('DD-MM-YYYY');
+                    this.items.personalDetail.dob = dayjs(this.items.personalDetail.dob).format('DD-MM-YYYY');
                 }
                 this.initContact();
                 this.initSpouse();
@@ -336,11 +335,11 @@ export class PersonalDetailsComponent implements OnInit {
         this.isBlur = false;
         this.items.personalDetail.nric = this.items.personalDetail.nric.toString();
         if (this.items.personalDetail.dob !== '') {
-            this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('YYYY-MM-DD');
+            this.items.personalDetail.dob = dayjs(this.items.personalDetail.dob).format('YYYY-MM-DD');
         } this.apiService.patch_user_info_personal_id(this.data(), this.items.id).subscribe(
             (val) => {
                 this.items.personalDetail = val;
-                this.items.personalDetail.dob = moment(this.items.personalDetail.dob).format('DD-MM-YYYY');
+                this.items.personalDetail.dob = dayjs(this.items.personalDetail.dob).format('DD-MM-YYYY');
                 this.notification('Edit mode disabled. Good job!', true);
             },
             response => {
@@ -359,7 +358,7 @@ export class PersonalDetailsComponent implements OnInit {
             "fullname": this.items.personalDetail.fullname,
             "nickname": this.items.personalDetail.nickname,
             "nric": this.items.personalDetail.nric.toString(),
-            "dob": moment(this.firstPicker.value).format('YYYY-MM-DD'),
+            "dob": dayjs(this.firstPicker.value).format('YYYY-MM-DD'),
             "gender": this.items.personalDetail.gender,
             "maritalStatus": this.items.personalDetail.maritalStatus,
             "race": this.items.personalDetail.race,

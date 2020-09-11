@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../../../../src/services/shared-service/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import * as _moment from 'moment';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { LeavePlanningAPIService } from '../leave-planning-api.service';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../../../src/app/employee/date.adapter';
 import { ApplyLeaveConfirmationComponent } from './apply-leave-confirmation/apply-leave-confirmation.component';
-const moment = _moment;
+const dayjs = require('dayjs');
 /**
  * Apply Leave Page
  * @export
@@ -352,8 +351,8 @@ export class ApplyLeaveComponent implements OnInit {
             if (result[i] !== undefined) {
                 const minMax = this.getMinMaxDate(result[i]);
                 const remainingFullDay = {
-                    "startDate": moment(minMax[0]).format('YYYY-MM-DD HH:mm:ss'),
-                    "endDate": moment(minMax[1]).format('YYYY-MM-DD HH:mm:ss'),
+                    "startDate": dayjs(minMax[0]).format('YYYY-MM-DD HH:mm:ss'),
+                    "endDate": dayjs(minMax[1]).format('YYYY-MM-DD HH:mm:ss'),
                     "dayType": 0,
                     "slot": "",
                     "quarterDay": ""
@@ -439,8 +438,8 @@ export class ApplyLeaveComponent implements OnInit {
 
         for (let i = 0; i < this.halfDayIndex.length; i++) {
             const remainingFullDay = {
-                "startDate": _moment(this._dateArray[this.halfDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
-                "endDate": _moment(this._dateArray[this.halfDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
+                "startDate": dayjs(this._dateArray[this.halfDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
+                "endDate": dayjs(this._dateArray[this.halfDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
                 "dayType": 1,
                 "slot": this._slot[this.halfDayIndex[i]],
                 "quarterDay": ""
@@ -450,8 +449,8 @@ export class ApplyLeaveComponent implements OnInit {
 
         for (let i = 0; i < this.quarterDayIndex.length; i++) {
             const remainingFullDay = {
-                "startDate": _moment(this._dateArray[this.quarterDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
-                "endDate": _moment(this._dateArray[this.quarterDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
+                "startDate": dayjs(this._dateArray[this.quarterDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
+                "endDate": dayjs(this._dateArray[this.quarterDayIndex[i]]).format('YYYY-MM-DD HH:mm:ss'),
                 "dayType": 2,
                 "slot": "",
                 "quarterDay": this._selectedQuarterHour[this.quarterDayIndex[i]]
@@ -469,14 +468,14 @@ export class ApplyLeaveComponent implements OnInit {
     onDateChange(): void {
         if (!this.applyLeaveForm.value.firstPicker || !this.applyLeaveForm.value.secondPicker) {
         } else {
-            this._reformatDateFrom = moment(this.applyLeaveForm.value.firstPicker).format('YYYY-MM-DD HH:mm:ss');
-            this._reformatDateTo = moment(this.applyLeaveForm.value.secondPicker).format('YYYY-MM-DD HH:mm:ss');
+            this._reformatDateFrom = dayjs(this.applyLeaveForm.value.firstPicker).format('YYYY-MM-DD HH:mm:ss');
+            this._reformatDateTo = dayjs(this.applyLeaveForm.value.secondPicker).format('YYYY-MM-DD HH:mm:ss');
             this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber);
             this.dateSelection = this._dateArray;
             this.dayName = [];
             this._slot = []; this._selectedQuarterHour = []; this._firstForm = [];
             for (let i = 0; i < this.dateSelection.length; i++) {
-                this.dateSelection[i] = _moment(this.dateSelection[i]).format('DD MMMM YYYY');
+                this.dateSelection[i] = dayjs(this.dateSelection[i]).format('DD MMMM YYYY');
                 this.dayName.push("0");
                 this.amButton.push(true);
                 this.Q1Button.push(true);
@@ -599,7 +598,7 @@ export class ApplyLeaveComponent implements OnInit {
      * @memberof ApplyLeaveComponent
      */
     getValueFrom(event: MatDatepickerInputEvent<string>): string {
-        return this.minDate = moment(event.value).format('YYYY-MM-DD');
+        return this.minDate = dayjs(event.value).format('YYYY-MM-DD');
     }
 
     /**
@@ -609,7 +608,7 @@ export class ApplyLeaveComponent implements OnInit {
      * @memberof ApplyLeaveComponent
      */
     getValueTo(event: MatDatepickerInputEvent<string>): string {
-        const toDate: string = moment(event.value).format('YYYY-MM-DD');
+        const toDate: string = dayjs(event.value).format('YYYY-MM-DD');
         if (toDate < this.minDate) {
             return this.maxDate = this.minDate;
         } else {
