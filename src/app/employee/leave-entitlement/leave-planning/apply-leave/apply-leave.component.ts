@@ -192,6 +192,14 @@ export class ApplyLeaveComponent implements OnInit {
     private _dateArray: any;
 
     /**
+     * holiday date of this user (according calendar profile)
+     * @private
+     * @type {*}
+     * @memberof ApplyLeaveComponent
+     */
+    private _holiday: any = [];
+
+    /**
      * Local private property for start date
      * @private
      * @type {string}
@@ -271,15 +279,14 @@ export class ApplyLeaveComponent implements OnInit {
                     );
                     this._weekDayNumber.push(weekdays.indexOf(data.rest[i].fullname));
                 }
+                for (let j = 0; j < data.holiday.length; j++) {
+                    this._holiday.push(data.holiday[j].start);
+                }
             }
         );
         this.leaveAPI.get_entilement_details().subscribe(list => {
             this.entitlement = list;
         })
-        // setTimeout(() => {
-        //     let calendarApi = this.calendarComponent.getApi();
-        //     calendarApi.render();
-        // }, 100);
     }
 
     /**
@@ -470,7 +477,7 @@ export class ApplyLeaveComponent implements OnInit {
         } else {
             this._reformatDateFrom = dayjs(this.applyLeaveForm.value.firstPicker).format('YYYY-MM-DD HH:mm:ss');
             this._reformatDateTo = dayjs(this.applyLeaveForm.value.secondPicker).format('YYYY-MM-DD HH:mm:ss');
-            this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber);
+            this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday);
             this.dateSelection = this._dateArray;
             this.dayName = [];
             this._slot = []; this._selectedQuarterHour = []; this._firstForm = [];
@@ -551,14 +558,14 @@ export class ApplyLeaveComponent implements OnInit {
      * @returns
      * @memberof ApplyLeaveComponent
      */
-    getWeekDays(first: Date, last: Date, dayNumber: number[]) {
+    getWeekDays(first: Date, last: Date, dayNumber: number[], holiday: any[]) {
         if (first > last) return -1;
         var start = new Date(first.getTime());
         var end = new Date(last.getTime());
         this.daysCount = 0;
         this._dateArray = [];
         while (start <= end) {
-            if (!dayNumber.includes(start.getDay())) {
+            if (!dayNumber.includes(start.getDay()) && !holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
                 this.daysCount++;
                 this._dateArray.push(new Date(start));
             }
