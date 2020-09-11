@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGrigPlugin from '@fullcalendar/timegrid';
-import listYear from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
@@ -28,6 +26,13 @@ export class CalendarViewComponent implements OnInit {
      * @memberof CalendarViewComponent
      */
     @ViewChild('calendar') calendar: FullCalendarComponent;
+
+    /**
+     * input of view calendar tab changed
+     * @type {boolean}
+     * @memberof CalendarViewComponent
+     */
+    @Input() viewCalendarTab: boolean;
 
     /**
      * This is input property for plugins of Full Calendar Component
@@ -92,6 +97,13 @@ export class CalendarViewComponent implements OnInit {
     public onLeaveList: any
 
     /**
+     * this currrent year value
+     * @type {*}
+     * @memberof CalendarViewComponent
+     */
+    public year: any;
+
+    /**
      *Creates an instance of CalendarViewComponent.
      * @param {APIService} apiService
      * @param {LeavePlanningAPIService} leaveAPI
@@ -100,16 +112,33 @@ export class CalendarViewComponent implements OnInit {
     constructor(private apiService: APIService, private leaveAPI: LeavePlanningAPIService) { }
 
     /**
+     * detect change of view calendar tab
+     * @param {SimpleChanges} changes
+     * @memberof CalendarViewComponent
+     */
+    async ngOnChanges(changes: SimpleChanges) {
+        if (changes.viewCalendarTab !== undefined) {
+            if (changes.viewCalendarTab.currentValue == true) {
+                await this.allOnleaveList();
+                await this.getOnLeaveList(new Date());
+                this.events = this.PBList.concat(this.calendarList);
+                this.editDateFormat(this.PBList);
+                this.getEmployeeLeaveList(this.events);
+            }
+        }
+    }
+
+    /**
      * initial method
      * @memberof CalendarViewComponent
      */
     async ngOnInit() {
         const date = new Date();
-        let year = date.getFullYear();
+        this.year = date.getFullYear();
         let a = await this.apiService.get_user_profile().toPromise();
         this.list = a;
         this.calendarId = this.list.calendarId;
-        let holidayList = await this.leaveAPI.get_personal_holiday_calendar(this.calendarId, year).toPromise();
+        let holidayList = await this.leaveAPI.get_personal_holiday_calendar(this.calendarId, this.year).toPromise();
         this.PBList = holidayList.holiday;
         await this.allOnleaveList();
         await this.getOnLeaveList(new Date());
@@ -132,7 +161,7 @@ export class CalendarViewComponent implements OnInit {
      * @memberof CalendarViewComponent
      */
     async allOnleaveList() {
-        this.calendarList = await this.leaveAPI.get_all_onleave_list().toPromise();
+        this.calendarList = await this.leaveAPI.get_calendar_onleave_list({ 'enddate': this.year + '-12-31', 'startdate': this.year + '-01-01' }).toPromise();
         for (let i = 0; i < this.calendarList.length; i++) {
             if (this.calendarList[i].STATUS === 'APPROVED') {
                 this.calendarList[i]["backgroundColor"] = "#46cdcf";

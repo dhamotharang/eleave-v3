@@ -85,13 +85,13 @@
     </ion-card-header>
     <ion-card-content [class]="'hide-sm-down'" style="border-radius: 2px;box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
     background-color: #ffffff;margin: 20px;padding-top: 13px;">
-        <mat-tab-group selectedIndex="0">
+        <mat-tab-group selectedIndex="0" (selectedTabChange)="onTabChanged($event)">
             <!-- <mat-tab-header style="width: fit-content; border-radius: 4px;"> -->
             <mat-tab label="Apply Leave">
                 <app-apply-leave></app-apply-leave>
             </mat-tab>
             <mat-tab label="View Calendar">
-                <app-calendar-view></app-calendar-view>
+                <app-calendar-view [viewCalendarTab]=clickOnViewCalendar></app-calendar-view>
             </mat-tab>
 
             <!-- </mat-tab-header> -->
@@ -99,12 +99,12 @@
     </ion-card-content>
     <ion-card-content [class]="'hide-sm-up'" style="border-radius: 2px;box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.04);
     background-color: #ffffff;margin: 20px;padding-top: 13px;">
-        <mat-tab-group selectedIndex="0" class="mobileView-tab">
+        <mat-tab-group selectedIndex="0" class="mobileView-tab" (selectedTabChange)="onTabChanged($event)">
             <mat-tab label="Apply Leave">
                 <app-apply-leave></app-apply-leave>
             </mat-tab>
             <mat-tab label="View Calendar">
-                <app-calendar-view></app-calendar-view>
+                <app-calendar-view [viewCalendarTab]=clickOnViewCalendar></app-calendar-view>
             </mat-tab>
         </mat-tab-group>
     </ion-card-content>

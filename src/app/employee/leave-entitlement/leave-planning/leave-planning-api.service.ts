@@ -61,15 +61,6 @@ export class LeavePlanningAPIService {
     }
 
     /**
-     * get all employee onleave list 
-     * @returns {Observable<any>}
-     * @memberof LeavePlanningAPIService
-     */
-    get_all_onleave_list(): Observable<any> {
-        return this.api.getApi('/api/employee/calendar-leave-list');
-    }
-
-    /**
      * get requested user's entitlement details
      * leave type, entitled day, balance, pending, taken
      * @param {*} id

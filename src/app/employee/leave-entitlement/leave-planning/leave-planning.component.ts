@@ -52,6 +52,13 @@ export class LeavePlanningComponent implements OnInit {
     public url: any
 
     /**
+     * tab changed is view calendar
+     * @type {boolean}
+     * @memberof LeavePlanningComponent
+     */
+    public clickOnViewCalendar: boolean;
+
+    /**
      *Creates an instance of LeavePlanningComponent.
      * @param {APIService} API
      * @param {Router} router
@@ -85,5 +92,18 @@ export class LeavePlanningComponent implements OnInit {
      */
     backToProfile() {
         this.router.navigate(['/main/profile/leave-entitlement']);
+    }
+
+    /**
+     * detect tab changed
+     * @param {*} event
+     * @memberof LeavePlanningComponent
+     */
+    onTabChanged(event) {
+        if (event.index === 1) {
+            this.clickOnViewCalendar = true;
+        } else {
+            this.clickOnViewCalendar = false;
+        }
     }
 }
