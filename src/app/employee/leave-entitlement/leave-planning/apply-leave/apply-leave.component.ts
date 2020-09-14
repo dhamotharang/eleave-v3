@@ -237,6 +237,22 @@ export class ApplyLeaveComponent implements OnInit {
     private _selectedQuarterHour: string[] = [];
 
     /**
+     * show value of exclude PH
+     * @private
+     * @type {boolean}
+     * @memberof ApplyLeaveComponent
+     */
+    private _isExcludePH: boolean;
+
+    /**
+     * show value of exclude rest day
+     * @private
+     * @type {boolean}
+     * @memberof ApplyLeaveComponent
+     */
+    private _isExcludeRest: boolean;
+
+    /**
      * Creates an instance of ApplyLeaveComponent.
      * @param {APIService} apiService
      * @param {ActivatedRoute} route
@@ -286,9 +302,23 @@ export class ApplyLeaveComponent implements OnInit {
         );
         this.leaveAPI.get_entilement_details().subscribe(list => {
             this.entitlement = list;
+            console.log(this.entitlement);
         })
     }
 
+    /**
+     * according entitlement policy to filter selected date range
+     * @param {string} entitlementGUID
+     * @memberof ApplyLeaveComponent
+     */
+    getPolicy(entitlementGUID: string) {
+        this.leaveAPI.get_leavetype_entitlement_id(entitlementGUID).subscribe(data => {
+            console.log(data.PROPERTIES_XML.excludeDayType.isExcludeHoliday);
+            console.log(data.PROPERTIES_XML.excludeDayType.isExcludeRestDay);
+            this._isExcludePH = data.PROPERTIES_XML.excludeDayType.isExcludeHoliday;
+            this._isExcludeRest = data.PROPERTIES_XML.excludeDayType.isExcludeRestDay;
+        })
+    }
     /**
      * get details of file after upload from local file
      * @param {*} files
@@ -565,7 +595,25 @@ export class ApplyLeaveComponent implements OnInit {
         this.daysCount = 0;
         this._dateArray = [];
         while (start <= end) {
-            if (!dayNumber.includes(start.getDay()) && !holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
+            if (this._isExcludePH && this._isExcludeRest) {
+                if (!dayNumber.includes(start.getDay()) && !holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
+                    this.daysCount++;
+                    this._dateArray.push(new Date(start));
+                }
+            }
+            if (this._isExcludePH && !this._isExcludeRest) {
+                if (!holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
+                    this.daysCount++;
+                    this._dateArray.push(new Date(start));
+                }
+            }
+            if (!this._isExcludePH && this._isExcludeRest) {
+                if (!dayNumber.includes(start.getDay())) {
+                    this.daysCount++;
+                    this._dateArray.push(new Date(start));
+                }
+            }
+            if (!this._isExcludePH && !this._isExcludeRest) {
                 this.daysCount++;
                 this._dateArray.push(new Date(start));
             }

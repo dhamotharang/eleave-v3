@@ -73,6 +73,17 @@ export class LeavePlanningAPIService {
     }
 
     /**
+     * get leave entitlement policy (to check PH & rest day allow or not)
+     * @param {*} id
+     * @returns {Observable<any>}
+     * @memberof LeavePlanningAPIService
+     */
+    get_leavetype_entitlement_id(id): Observable<any> {
+        this.api.headerAuthorization();
+        return this.api.getApiWithId('/api/leavetype-entitlement/', id);
+    }
+
+    /**
      * Show message of pass or fail after post data
      * @param {string} message
      * @memberof LeavePlanningAPIService
