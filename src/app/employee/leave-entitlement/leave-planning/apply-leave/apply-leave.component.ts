@@ -302,7 +302,6 @@ export class ApplyLeaveComponent implements OnInit {
         );
         this.leaveAPI.get_entilement_details().subscribe(list => {
             this.entitlement = list;
-            console.log(this.entitlement);
         })
     }
 
@@ -313,8 +312,6 @@ export class ApplyLeaveComponent implements OnInit {
      */
     getPolicy(entitlementGUID: string) {
         this.leaveAPI.get_leavetype_entitlement_id(entitlementGUID).subscribe(data => {
-            console.log(data.PROPERTIES_XML.excludeDayType.isExcludeHoliday);
-            console.log(data.PROPERTIES_XML.excludeDayType.isExcludeRestDay);
             this._isExcludePH = data.PROPERTIES_XML.excludeDayType.isExcludeHoliday;
             this._isExcludeRest = data.PROPERTIES_XML.excludeDayType.isExcludeRestDay;
         })

@@ -104,6 +104,13 @@ export class CalendarViewComponent implements OnInit {
     public year: any;
 
     /**
+     * is mobile or not (detected by window width)
+     * @type {boolean}
+     * @memberof CalendarViewComponent
+     */
+    public mobile: boolean;
+
+    /**
      *Creates an instance of CalendarViewComponent.
      * @param {APIService} apiService
      * @param {LeavePlanningAPIService} leaveAPI
@@ -145,6 +152,16 @@ export class CalendarViewComponent implements OnInit {
         this.events = this.PBList.concat(this.calendarList);
         this.editDateFormat(this.PBList);
         this.getEmployeeLeaveList(this.events);
+    }
+
+    /**
+     * window resize event
+     * @memberof CalendarViewComponent
+     */
+    onResize() {
+        if (window.innerWidth < 576) {
+            this.mobile = true;
+        } else { this.mobile = false; }
     }
 
     /**

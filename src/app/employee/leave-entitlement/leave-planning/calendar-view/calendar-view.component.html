@@ -1,4 +1,6 @@
-<div class='app-calendar'>
+<!-- calendar view -->
+<div (window:resize)="onResize()" [style.width.%]="mobile?'100':'50'"
+    style="margin-top: 20px;margin-bottom: 1%;display: inline-block;">
     <div class="apply-leave-header">
         Calendar
     </div>
@@ -20,7 +22,8 @@
         <span> Pending Approval</span></div>
 </div>
 
-<div class="holidayView" *ngIf="onLeaveList">
+<!-- who's on leave -->
+<div [class]="'hide-sm-down'" *ngIf="onLeaveList" style="margin-top: 20px;float: right;width: 50%;">
     <div class="apply-leave-header">
     </div>
     <p style="font-size: 15px;font-weight: bold;opacity: 0.8;color: #43425d;margin-left: 25px;margin-bottom: 25px;">
@@ -53,7 +56,65 @@
                 <ion-col size="4" style="color: #4d4f5c;font-size: 11px;" align-self-center>
                     {{holiday.FULLNAME}}
                 </ion-col>
-                <ion-col style="color: #7069d8;;font-size: 11px;font-weight: bold;" align-self-center>
+                <ion-col style="color: #7069d8;;font-size: 11px;font-weight: bold;text-overflow: ellipsis;
+                overflow: hidden;white-space: nowrap;" align-self-center>
+                    {{holiday.CODE}}<span *ngIf="holiday.TIME_SLOT != null"> - {{holiday.TIME_SLOT}}</span>
+                </ion-col>
+                <ion-col style="color: #4d4f5c;font-size: 11px;text-align: center;" align-self-center>
+                    <mat-chip-list>
+                        <mat-chip
+                            [ngClass]="{
+                            'approvedColor': holiday.STATUS == 'APPROVED','rejectColor': holiday.STATUS == 'REJECTED', 'cancelColor': holiday.STATUS == 'CANCELLED', 'pendingColor': holiday.STATUS == 'PENDING'}">
+                            <p
+                                style="white-space: nowrap;width: 100%;text-align: center;color: white;font-size: 10px;line-height: 2.22;">
+                                {{holiday.STATUS | titlecase}}</p>
+                        </mat-chip>
+                    </mat-chip-list>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+    <div *ngIf="onLeaveList.length == 0">
+        <p style="font-size: 12px;color: #43425d;margin: 25px;margin-left: 30px;">
+            No leave application on this day</p>
+    </div>
+</div>
+
+<div [class]="'hide-sm-up'" *ngIf="onLeaveList" style="margin-top: 20px;width: 100%;">
+    <div class="apply-leave-header">
+    </div>
+    <p style="font-size: 15px;font-weight: bold;opacity: 0.8;color: #43425d;margin-left: 25px;margin-bottom: 25px;">
+        Who's On Leave</p>
+    <ion-list style="padding: 0;" *ngIf="onLeaveList.length !== 0">
+        <ion-item style="width: 100%;height: 42px;" lines="none">
+            <ion-row class="titleRow">
+                <ion-col size="1" style="font-size: 13px;font-weight: bold;color: #a3a6b4;">
+                    ID
+                </ion-col>
+                <ion-col size="4" style="font-size: 13px;font-weight: bold;color: #a3a6b4;">
+                    Name
+                </ion-col>
+                <ion-col style="font-size: 13px;font-weight: bold;color: #a3a6b4;">
+                    Leave Type
+                </ion-col>
+                <ion-col style="font-size: 13px;font-weight: bold;color: #a3a6b4;text-align: center;">
+                    Status
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+    <ion-list style="margin-left: 25px;" *ngIf="onLeaveList.length !== 0">
+        <ion-item *ngFor="let holiday of onLeaveList" style="width: 100%;">
+            <ion-row style="width: 100%;">
+                <ion-col size="1" style="color: #4d4f5c;font-size: 11px;" align-self-center>
+                    {{holiday.STAFF_ID}}
+                </ion-col>
+                <ion-col size="4" style="color: #4d4f5c;font-size: 11px;" align-self-center>
+                    {{holiday.FULLNAME}}
+                </ion-col>
+                <ion-col style="color: #7069d8;;font-size: 11px;font-weight: bold;text-overflow: ellipsis;
+                overflow: hidden;white-space: nowrap;" align-self-center>
                     {{holiday.CODE}}<span *ngIf="holiday.TIME_SLOT != null"> - {{holiday.TIME_SLOT}}</span>
                 </ion-col>
                 <ion-col style="color: #4d4f5c;font-size: 11px;text-align: center;" align-self-center>
