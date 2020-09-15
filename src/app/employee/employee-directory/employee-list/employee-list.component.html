@@ -1,5 +1,5 @@
 <!-------------------------------------------LIST VIEW------------------------------------------>
-<div class="connectionsContainer" *ngIf="listView">
+<div class="connectionsContainer" *ngIf="listView" (window:resize)="onResize()">
     <div class="topHeader">
         <ion-button class="people" *ngIf="items" color="primary" [style.pointerEvents]="'none'">
             <p style="color: white; margin-bottom: 0;">{{items.length}} Peoples</p>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </pagination-template>
-            <div style="font-size: 10px;margin-top: -8px;white-space: nowrap;float: right;">
+            <div style="font-size: 10px;white-space: nowrap;float: right;">
                 <pagination-controls (pageChange)="p = $event" maxSize="5" directionLinks="true" previousLabel=""
                     nextLabel="">
                 </pagination-controls>
@@ -98,7 +98,7 @@
 </div>
 <!-------------------------------------------GRID VIEW------------------------------------------>
 
-<div class="connectionsContainer" *ngIf="gridView">
+<div class="connectionsContainer" *ngIf="gridView" (window:resize)="onResize()">
     <div class="topHeader">
         <div [class]="'hide-sm-down'">
             <ion-button class="people" *ngIf="items" color="primary" [style.pointerEvents]="'none'">
@@ -196,7 +196,7 @@
                 </div>
             </div>
         </pagination-template>
-        <div style="font-size: 10px;margin-top: -8px;white-space: nowrap;float: right;">
+        <div style="font-size: 10px;white-space: nowrap;float: right;">
             <pagination-controls (pageChange)="p = $event" maxSize="5" directionLinks="true" previousLabel=""
                 nextLabel="">
             </pagination-controls>

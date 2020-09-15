@@ -1,5 +1,5 @@
 <div [class]="'hide-sm-down'" style="height: 100%;">
-  <div class="row" style="height: 100%;">
+  <div class="rows" style="height: 100%;">
     <!-- <div class="row hide-sm-down"> -->
     <div class="column1" style="display: inline-block">
       <img style="width: 100%;height:100%; object-fit: cover;" src="assets/group244@3x.png">
@@ -40,10 +40,10 @@
               [checked]="valueOfCheck" style="display: inline-flex;--size: 11px;z-index: 0;"
               [disabled]="!formGroupValidation.valid">
             </ion-checkbox>
-            <p style="margin-top: -16px;padding-left: 20px; font-size: 11px;color:#43425d">
+            <p style="margin-top: -20px;padding-left: 20px; font-size: 11px;color:#43425d">
               Remember me</p>
             <!-- <p style="font-size: 11px;color: #43425d;text-align: right;margin-top: -24px;cursor: pointer;" (click)="forgotPass=true">Forgot Password -->
-            <p style="font-size: 11px;color: #43425d;text-align: right;margin-top: -24px;cursor: pointer;"
+            <p style="font-size: 11px;color: #43425d;text-align: right;margin-top: -32px;cursor: pointer;"
               (click)="toForgotPasswordPage()">Forgot Password
             </p>
           </div>
@@ -84,7 +84,7 @@
   </div>
 </div>
 <div [class]="'hide-sm-up'">
-  <div class="row">
+  <div class="rows">
     <img
       style="min-width: -webkit-fill-available; min-height: -webkit-fill-available; object-fit: cover; position: absolute;"
       src="assets/group244@3x.png">
@@ -122,9 +122,9 @@
           <ion-checkbox (ionChange)="rememberMe($event, emailInput.value, passwordInput.value)" [checked]="valueOfCheck"
             style="display: inline-flex;--size: 11px;z-index: 0;" [disabled]="!formGroupValidation.valid">
           </ion-checkbox>
-          <p style="margin-top: -16px;padding-left: 20px; font-size: 11px;">
+          <p style="margin-top: -20px;padding-left: 20px; font-size: 11px;">
             Remember me</p>
-          <p style="font-size: 11px;;text-align: right;margin-top: -24px;cursor: pointer;"
+          <p style="font-size: 11px;;text-align: right;margin-top: -32px;cursor: pointer;"
             (click)="toForgotPasswordPage()">Forgot Password </p>
         </div>
         <ion-button fill="clear" style="display: block; font-size: 11px; width: 124px; text-transform: capitalize; --background: #43425d; height: 34px;

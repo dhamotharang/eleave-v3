@@ -71,6 +71,13 @@ export class EmployeeListComponent implements OnInit {
     public url: any;
 
     /**
+     * detect window size
+     * @type {boolean}
+     * @memberof EmployeeListComponent
+     */
+    public mobile: boolean;
+
+    /**
      * page number of paginator
      * @type {number}
      * @memberof EmployeeListComponent
@@ -97,7 +104,7 @@ export class EmployeeListComponent implements OnInit {
         this.apiService.get_user_profile_list().subscribe(
             (data: any[]) => {
                 this.items = data;
-                
+
                 this.showSpinner = false;
             }
         );
@@ -111,6 +118,16 @@ export class EmployeeListComponent implements OnInit {
     viewList(showList: boolean) {
         this.listView = showList;
         this.gridView = !showList;
+    }
+
+    /**
+     * detect window resize event
+     * @memberof EmployeeListComponent
+     */
+    onResize() {
+        if (window.innerWidth < 576) {
+            this.viewList(false);
+        }
     }
 
     /**

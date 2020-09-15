@@ -175,6 +175,14 @@ export class DashboardComponent implements OnInit {
     private _reason: string;
 
     /**
+     * cancel application or submit task application
+     * @private
+     * @type {string}
+     * @memberof DashboardComponent
+     */
+    private _application: string = '';
+
+    /**
      * set menu is open or close by assign new class
      * @type {boolean}
      * @memberof DashboardComponent
@@ -238,8 +246,8 @@ export class DashboardComponent implements OnInit {
         dialog.afterClosed().subscribe(result => {
             if (result != undefined) {
                 this._reason = result[1];
+                this._application = 'request cancel';
                 this.postLeaveApplicationStatus(result[2], result[0]);
-                this.dashboardAPI.popUpDialog("You've cancelled your leave application request", true);
             }
         });
     }
@@ -259,8 +267,8 @@ export class DashboardComponent implements OnInit {
         if (value !== undefined) {
             console.log(value);
             this._reason = value[1];
+            this._application = 'submit task';
             await this.postLeaveApplicationStatus(value[2], value[0]);
-            this.dashboardAPI.popUpDialog("Your tasks has been submitted successfully", true);
         };
     }
 
@@ -401,6 +409,12 @@ export class DashboardComponent implements OnInit {
         this.dashboardAPI.post_application_status({ "id": leaveGUID, "reason": this._reason }, status).subscribe(response => {
             this.get_task_list();
             this.get_annual_medical_task();
+            if (this._application == 'request cancel') {
+                this.dashboardAPI.popUpDialog("You've cancelled your leave application request", true);
+            } else {
+                this.dashboardAPI.popUpDialog("Your tasks has been submitted successfully", true);
+            }
+            this._application = '';
         }, error => this.dashboardAPI.popUpDialog(JSON.parse(error._body).status, false))
     }
 
