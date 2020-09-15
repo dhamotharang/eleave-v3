@@ -11,8 +11,6 @@ import { sideMenuNavigationRoutes } from './side-menu-navigation.routes';
 import { EmployeeSetupPageModule } from '../../../src/app/employee/employee-setup.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
-import { UpdatePasswordModule } from '../employee/update-password/update-password.module';
-import { EmailInvitationModule } from '../employee/email-invitation/email-invitation.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { SharedService } from '../employee/shared.service';
 import { RouteDialogComponent } from '../employee/route-dialog/route-dialog.component';
@@ -26,8 +24,6 @@ import { RouteDialogComponent } from '../employee/route-dialog/route-dialog.comp
     // HttpClientModule,
     EmployeeSetupPageModule,
     MatMenuModule,
-    UpdatePasswordModule,
-    EmailInvitationModule,
     DashboardModule,
     RouterModule.forChild(sideMenuNavigationRoutes)
   ],
