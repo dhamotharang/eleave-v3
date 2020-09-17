@@ -373,6 +373,10 @@
                             </ion-item-group>
                         </ion-card-content>
                     </ion-card>
+                    <ng-container *ngIf="entitlement && entitlement.length < 1">
+                        <p style="font-size: 12px;color: #43425d;margin-left: 20px;">No leave
+                            entitlement assigned yet</p>
+                    </ng-container>
                 </ion-row>
             </div>
             <div [class]="'hide-sm-up'">
@@ -392,6 +396,10 @@
                         </ion-item-group>
                     </ion-card-content>
                 </ion-card>
+                <ng-container *ngIf="entitlement && entitlement.length < 1">
+                    <p style="font-size: 12px;color: #43425d;margin-left: 20px;">No leave
+                        entitlement assigned yet</p>
+                </ng-container>
             </div>
         </div>
     </ion-col>

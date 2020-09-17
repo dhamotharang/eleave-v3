@@ -77,25 +77,14 @@ export class LeaveEntitlementsComponent implements OnInit {
     public url: any;
 
     /**
-     * Return API content
-     * @readonly
-     * @memberof LeaveEntitlementsComponent
-     */
-    public get personalList() {
-        return this.personalDataList;
-    }
-
-    /**
      *Creates an instance of LeaveEntitlementsComponent.
      * @param {APIService} apiService
+     * @param {LeavePlanningAPIService} apiLeave
      * @param {Router} router
      * @memberof LeaveEntitlementsComponent
      */
     constructor(private apiService: APIService, private apiLeave: LeavePlanningAPIService, private router: Router
     ) {
-        // xservice.percentChanged.subscribe(value => {
-        //     this.progressPercentage = value;
-        // })
         this.apiService.get_profile_pic('personal').subscribe(img => this.url = img)
     }
 
@@ -104,22 +93,17 @@ export class LeaveEntitlementsComponent implements OnInit {
      * Get user profile details from API
      * @memberof LeaveEntitlementsComponent
      */
-    ngOnInit() {
-        this.apiService.get_user_profile().subscribe(
-            (data: any[]) => {
-                this.personalDataList = data;
-                this.showSpinner = false;
-                this.showContent = true;
-            });
+    async ngOnInit() {
+        let data = await this.apiService.get_user_profile().toPromise();
+        this.personalDataList = data;
+        this.showSpinner = false;
+        this.showContent = true;
 
-        this.apiService.get_user_info_employment_details().subscribe(
-            dataUserDtls => {
-                this.employeeDetails = dataUserDtls;
-            }
-        )
-        this.apiLeave.get_entilement_details().subscribe(data => {
-            this.entitlement = data;
-        })
+        let dataUserDtls = await this.apiService.get_user_info_employment_details().toPromise();
+        this.employeeDetails = dataUserDtls;
+
+        let entitlementData = await this.apiLeave.get_entilement_details().toPromise();
+        this.entitlement = entitlementData;
     }
 
 
