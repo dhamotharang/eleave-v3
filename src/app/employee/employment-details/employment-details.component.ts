@@ -141,6 +141,11 @@ export class EmploymentDetailsComponent implements OnInit {
         this.apiService.get_user_info_employment_details().subscribe(
             dataUserDtls => {
                 this.list = dataUserDtls;
+                if (this.list.employmentDetail != undefined) {
+                    this.list.employmentDetail.dateOfJoin = dayjs(this.list.employmentDetail.dateOfJoin).format('DD-MM-YYYY');
+                    this.list.employmentDetail.dateOfConfirmation = dayjs(this.list.employmentDetail.dateOfConfirmation).format('DD-MM-YYYY');
+                    this.list.employmentDetail.dateOfResignation = dayjs(this.list.employmentDetail.dateOfResignation).format('DD-MM-YYYY');
+                }
                 this.showSpinner = false;
                 this.showContent = true;
                 this.apiService.get_profile_pic('all').subscribe(data => {
