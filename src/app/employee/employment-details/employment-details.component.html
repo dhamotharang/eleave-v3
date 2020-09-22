@@ -196,21 +196,33 @@
                         </ion-col>
                         <ion-col>
                             <ion-label>Date Of Join</ion-label>
-                            <p style="white-space: nowrap;">
+                            <p style="white-space: nowrap;"
+                                *ngIf="personalList.employmentDetail.dateOfJoin != 'Invalid Date' && personalList.employmentDetail.dateOfJoin != 'Invalid date'">
                                 {{personalList.employmentDetail.dateOfJoin }}</p>
+                            <p style="white-space: nowrap;"
+                                *ngIf="personalList.employmentDetail.dateOfJoin == 'Invalid Date' || personalList.employmentDetail.dateOfJoin == 'Invalid date'">
+                                N/A</p>
                         </ion-col>
                         <ion-col></ion-col>
                     </ion-row>
                     <ion-row class="detailsRow">
                         <ion-col>
                             <ion-label>Confirmation Date</ion-label>
-                            <p>
+                            <p
+                                *ngIf="personalList.employmentDetail.dateOfConfirmation != 'Invalid Date' && personalList.employmentDetail.dateOfConfirmation != 'Invalid date'">
                                 {{personalList.employmentDetail.dateOfConfirmation }}</p>
+                            <p
+                                *ngIf="personalList.employmentDetail.dateOfConfirmation == 'Invalid Date' || personalList.employmentDetail.dateOfConfirmation == 'Invalid date'">
+                                N/A</p>
                         </ion-col>
                         <ion-col>
                             <ion-label>Resignation Date</ion-label>
-                            <p>
+                            <p
+                                *ngIf="personalList.employmentDetail.dateOfResignation != 'Invalid Date' && personalList.employmentDetail.dateOfResignation != 'Invalid date'">
                                 {{personalList.employmentDetail.dateOfResignation}}</p>
+                            <p
+                                *ngIf="personalList.employmentDetail.dateOfResignation == 'Invalid Date' || personalList.employmentDetail.dateOfResignation == 'Invalid date'">
+                                N/A</p>
                         </ion-col>
                         <ion-col>
                             <ion-label>Year Of Service</ion-label>
