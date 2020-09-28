@@ -165,7 +165,7 @@
                             <ion-label style="display: block;">Reporting To</ion-label>
                             <ng-container *ngIf="reportingUrl">
                                 <ng-container *ngFor="let list of reportingUrl.details; let j= index">
-                                    <ng-container *ngIf="list.FULLNAME == personalList.employmentDetail.reportingTo">
+                                    <ng-container *ngIf="list.USER_GUID == personalList.employmentDetail.reportingTo">
                                         <ion-avatar
                                             style="width: 24px; height: 24px; display: inline-block; margin-top: 3px"
                                             *ngIf="list.PROFILE_PICTURE !== null">
@@ -180,7 +180,7 @@
                                 </ng-container>
                             </ng-container>
                             <p style="display: inline;top: 31px;left: 37px;position:absolute">
-                                {{personalList.employmentDetail.reportingTo}}
+                                {{personalList.employmentDetail.reportingToName}}
                             </p>
                         </ion-col>
                         <ion-col></ion-col>
@@ -247,7 +247,7 @@
                             <ion-label style="display: block;">Reporting To</ion-label>
                             <ng-container *ngIf="reportingUrl">
                                 <ng-container *ngFor="let list of reportingUrl.details; let j= index">
-                                    <ng-container *ngIf="list.FULLNAME == personalList.employmentDetail.reportingTo">
+                                    <ng-container *ngIf="list.USER_GUID == personalList.employmentDetail.reportingTo">
                                         <ion-avatar
                                             style="width: 24px; height: 24px; display: inline-block; margin-top: 3px"
                                             *ngIf="list.PROFILE_PICTURE !== null">
@@ -262,7 +262,7 @@
                                 </ng-container>
                             </ng-container>
                             <p style="display: inline;position: absolute;top: 31px;left: 37px;">
-                                {{personalList.employmentDetail.reportingTo}}
+                                {{personalList.employmentDetail.reportingToName}}
                             </p>
                         </ion-col>
                         <ion-col>

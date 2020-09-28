@@ -174,7 +174,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('view_admin', data.admin_profile.value)
       }, error => {
         this.spinner.hide();
-        alert(error.message);
+        alert(error.message + ', ' + error.error.message.message);
       }
       );
   }

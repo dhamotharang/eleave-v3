@@ -211,23 +211,26 @@ export class EmploymentDetailsComponent implements OnInit {
         if (body.dateOfResignation != '') {
             body.dateOfResignation = dayjs(body.dateOfResignation).format('YYYY-MM-DD');
         }
-        let list = await this.apiService.get_user_profile_list().toPromise();
-        list.filter(item => {
-            if (item.employeeName === body.reportingTo) {
-                body.reportingTo = item.userId;
-            }
-        })
+        delete body.reportingToName;
+        console.log(body);
+        // let list = await this.apiService.get_user_profile_list().toPromise();
+        // list.filter(item => {
+        //     if (item.userId === body.reportingTo) {
+        //         body.reportingTo = item.userId;
+        //     }
+        // })
         this.apiService.patch_user_info_employement_id(body, this.list.id).subscribe(res => {
             this.showEditProfile = false;
             this.snackbarMsg('Edit mode disabled. Good job!', true);
-            this.apiService.get_user_profile_list().subscribe(data => {
-                this.list.employmentDetail = res;
-                data.filter(item => {
-                    if (this.list.employmentDetail.reportingTo === item.userId) {
-                        this.list.employmentDetail.reportingTo = item.employeeName
-                    }
-                })
-            });
+            this.list.employmentDetail = res;
+            // this.apiService.get_user_profile_list().subscribe(data => {
+            //     this.list.employmentDetail = res;
+            //     data.filter(item => {
+            //         if (this.list.employmentDetail.reportingTo === item.userId) {
+            //             this.list.employmentDetail.reportingTo = item.employeeName
+            //         }
+            //     })
+            // });
         },
             err => {
                 this.snackbarMsg(JSON.parse(err._body).message[0].constraints.isNotEmpty, false);
