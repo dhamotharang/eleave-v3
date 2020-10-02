@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { LocalStorageService, SessionStorageService, LocalStorage, SessionStorage } from 'angular-web-storage';
+import { LocalStorageService, SessionStorageService } from 'angular-web-storage';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 /**
  * authenticate service
@@ -21,6 +22,9 @@ export class AuthService {
      */
     public baseUrl: string = environment.API_URL;
 
+    public redirectUrl: string;
+
+
     /**
      *Creates an instance of AuthService.
      * @param {SessionStorageService} session
@@ -28,7 +32,7 @@ export class AuthService {
      * @param {HttpClient} httpClient
      * @memberof AuthService
      */
-    constructor(public session: SessionStorageService, public local: LocalStorageService, private httpClient: HttpClient) { }
+    constructor(private router: Router, public session: SessionStorageService, public local: LocalStorageService, private httpClient: HttpClient) { }
 
     /**
      * this is used to clear anything that needs to be removed
@@ -71,7 +75,13 @@ export class AuthService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     this.local.set('access_token', JSON.stringify(user.access_token));
                     this.local.set('loginType', user.login_type);
-                    this.isAuthenticated();
+                    // this.isAuthenticated();
+                    if (this.redirectUrl) {
+                        this.router.navigate([this.redirectUrl]);
+                        this.redirectUrl = null;
+                    } else {
+                        this.router.navigate(['main']);
+                    }
                     setTimeout(() => {
                         this.isTokenExpired();
                         this.isAuthenticated();

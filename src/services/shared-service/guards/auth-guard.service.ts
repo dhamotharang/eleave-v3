@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../../src/services/shared-service/auth.service';
 
@@ -23,26 +23,24 @@ export class AuthGuard implements CanActivate {
    * @memberof AuthGuard
    */
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this._authService.isAuthenticated()) {
-      return true;
-    } else {
-      // navigate to login page
-      this._router.navigate(['/login']);
-      // you can save redirect url so after authing we can move them back to the page they requested
-      return false;
-    }
-
-
-
+    let url: string = state.url;
+    return this.checkLogin(url);
   }
 
-  // canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-  //   if (localStorage.getItem('access_token')) {
-  //     return true;
-  //   }
+  checkLogin(url: string): boolean {
+    if (this._authService.isAuthenticated()) {
+      return true;
+    }
+    // Store the attempted URL for redirecting
+    this._authService.redirectUrl = url;
 
-  //   this._router.navigate(['/login']);
-  //   return false;
-  // }
+    // Navigate to the login page with extras
+    this._router.navigate([''], {
+      queryParams: {
+        returnUrl: this._authService.redirectUrl
+      }
+    });
+    return false;
+  }
 
 }
