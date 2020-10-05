@@ -167,6 +167,13 @@ export class DashboardComponent implements OnInit {
     public todayDate: Date;
 
     /**
+     * need scroll when url is /task
+     * @type {boolean}
+     * @memberof DashboardComponent
+     */
+    public needScroll: boolean = false;
+
+    /**
      * reason value get from confirmation pop up
      * @private
      * @type {string}
@@ -193,7 +200,7 @@ export class DashboardComponent implements OnInit {
      *Creates an instance of DashboardComponent.
      * @param {DashboardApiService} dashboardAPI
      * @param {MenuController} menu
-     * @param {MatDialog} dialog
+     * @param {Router} router
      * @memberof DashboardComponent
      */
     constructor(private dashboardAPI: DashboardApiService, private menu: MenuController, private router: Router) {
@@ -207,8 +214,12 @@ export class DashboardComponent implements OnInit {
                 this.getAnnouncementList();
                 this.getHolidayList();
                 this.get_annual_medical_task();
+                if (event.urlAfterRedirects == '/main/task') {
+                    this.needScroll = true;
+                } else {
+                    this.needScroll = false;
+                }
             });
-
     }
 
     /**
@@ -265,7 +276,6 @@ export class DashboardComponent implements OnInit {
         });
         let value = await dialog.afterClosed().toPromise();
         if (value !== undefined) {
-            console.log(value);
             this._reason = value[1];
             this._application = 'submit task';
             await this.postLeaveApplicationStatus(value[2], value[0]);

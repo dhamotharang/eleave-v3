@@ -234,7 +234,7 @@
 
 
 <!-- ------------------------------ Dashboard content ------------------------------- -->
-<div class="main">
+<div class="main" #destination [scrollTop]="needScroll == true ? destination.scrollHeight : 0">
     <div class="row" *ngIf="row">
         <span style="display: flex; flex-flow: wrap; flex: 1;margin-top: 20px;">
             <div class="annual">
@@ -296,7 +296,8 @@
                 <p style="font-size: 12px;opacity: 0.5;color: #43425d;line-height: 1.25;display: inline-block;
                     margin-bottom: 0;width: 100%;">Days Available</p>
             </div>
-            <div class="birthday" style="position: relative;" [style.padding-bottom.px]="birthdayDetail.day == 'Invalid date'? '15' : '0' ">
+            <div class="birthday" style="position: relative;"
+                [style.padding-bottom.px]="birthdayDetail.day == 'Invalid date'? '15' : '0' ">
                 <p
                     style="font-size: 12px;color:#43425d;opacity: 0.8;font-weight: bold;line-height: 1.25;padding-top: 16px;">
                     Birthday

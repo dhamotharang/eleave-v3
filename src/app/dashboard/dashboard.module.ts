@@ -11,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GoogleChartModule } from '../../../src/library/google-chart/google-chart.module';
 import { SpinnerModule } from '../../../src/library/spinner/spinner.module';
-import { MatTooltipModule, MatFormField, MatFormFieldModule, MatDialogModule, MatInputModule, MatRadioModule } from '@angular/material';
+import { MatTooltipModule, MatFormFieldModule, MatDialogModule, MatInputModule, MatRadioModule } from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { LeaveApplicationConfirmationComponent } from './leave-application-confirmation/leave-application-confirmation.component';
 
