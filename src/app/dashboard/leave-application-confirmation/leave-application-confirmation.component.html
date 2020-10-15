@@ -41,7 +41,7 @@
     </mat-radio-button>
   </mat-radio-group>
   <mat-form-field class="reasonBox" appearance="outline" style="width: 98%;">
-    <input matInput placeholder="Reason" [formControl]="reason" required>
+    <input matInput placeholder="Reason (required)" [formControl]="reason" required>
   </mat-form-field>
 </div>
 <div *ngIf="data.title === 'application'" mat-dialog-actions
