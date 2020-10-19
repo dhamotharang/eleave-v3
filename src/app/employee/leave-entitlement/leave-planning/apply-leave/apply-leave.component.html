@@ -244,9 +244,9 @@
                     <mat-radio-group [value]="dayName[j]" (change)="dayNameChanged($event, j)">
                         <mat-radio-button value="0" color="primary" style="padding-right: 25px;" [checked]=true>Full Day
                         </mat-radio-button>
-                        <mat-radio-button value="1" color="primary" style="padding-right: 25px;">Half Day
+                        <mat-radio-button value="1" color="primary" style="padding-right: 25px;" *ngIf="allowHalfQuarDay">Half Day
                         </mat-radio-button>
-                        <mat-radio-button value="2" color="primary" style="padding-right: 25px;">Quarter Day
+                        <mat-radio-button value="2" color="primary" style="padding-right: 25px;" *ngIf="allowHalfQuarDay">Quarter Day
                         </mat-radio-button>
                     </mat-radio-group>
                     <mat-form-field style="width: 35%;height: 60px;" appearance="outline">
@@ -291,7 +291,7 @@
                     </div>
                 </div>
                 <ion-item class="divider" lines="full" style="width:97%;"></ion-item>
-                <ion-button fill="outline" (click)="file.click();"
+                <ion-button fill="outline" (click)="file.click();" *ngIf="allowCertification"
                     style="--border-radius: 2px;background: #f5f6fa;height: 30px; min-width: 40%;font-size: 12px;text-transform: none">
                     Upload Attachment
                 </ion-button>
@@ -299,8 +299,8 @@
                     style="display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"
                     [href]="uploadedFile.link" download>{{uploadedFile.filename}}</a>
                 <input style="display:none" #file name="file" type="file" (change)="uploadEvent($event.target.files)">
-                <p style="color: #808495;font-size:11px;margin-bottom: 15px;">File Allowed: .jpg,
-                    .png, .pdf only (max size 1MB)
+                <p *ngIf="allowCertification" style="color: #808495;font-size:11px;margin-bottom: 15px;">File Allowed: .jpg,
+                    .png, .pdf only
                 </p>
                 <mat-form-field class="reasonBox" appearance="outline" style="width: 98%;">
                     <mat-label>Reason</mat-label>

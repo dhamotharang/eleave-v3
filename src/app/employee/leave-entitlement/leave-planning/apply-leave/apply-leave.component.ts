@@ -168,6 +168,20 @@ export class ApplyLeaveComponent implements OnInit {
     public uploadedFile: any;
 
     /**
+     * allow to attach certification or not according policy
+     * @type {*}
+     * @memberof ApplyLeaveComponent
+     */
+    public allowCertification: boolean = true;
+
+    /**
+     * allow half day & quarter day 
+     * @type {boolean}
+     * @memberof ApplyLeaveComponent
+     */
+    public allowHalfQuarDay: boolean = true;
+
+    /**
      * Local private property for value get from API
      * @private
      * @type {*}
@@ -314,6 +328,8 @@ export class ApplyLeaveComponent implements OnInit {
         this.leaveAPI.get_leavetype_entitlement_id(entitlementGUID).subscribe(data => {
             this._isExcludePH = data.PROPERTIES_XML.excludeDayType.isExcludeHoliday;
             this._isExcludeRest = data.PROPERTIES_XML.excludeDayType.isExcludeRestDay;
+            this.allowCertification = data.PROPERTIES_XML.attachmentRequired;
+            this.allowHalfQuarDay = data.PROPERTIES_XML.applyFractionUnit;
         })
     }
     /**
