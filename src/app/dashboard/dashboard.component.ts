@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { LeaveApplicationConfirmationComponent } from './leave-application-confirmation/leave-application-confirmation.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { LeavePlanningAPIService } from '../employee/leave-entitlement/leave-planning/leave-planning-api.service';
 const dayjs = require('dayjs');
 
 /**
@@ -203,7 +204,7 @@ export class DashboardComponent implements OnInit {
      * @param {Router} router
      * @memberof DashboardComponent
      */
-    constructor(private dashboardAPI: DashboardApiService, private menu: MenuController, private router: Router) {
+    constructor(private dashboardAPI: DashboardApiService, private menu: MenuController, private router: Router, private leaveApi: LeavePlanningAPIService) {
         router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe((event: NavigationEnd) => {
@@ -313,11 +314,17 @@ export class DashboardComponent implements OnInit {
             this.dashboardAPI.get_user_application_status(this.annualVal.USER_GUID).subscribe(val => {
                 this.applicationStatus = val;
                 for (let i = 0; i < this.applicationStatus.length; i++) {
-                    if (new Date(this.applicationStatus[i].startDate) > this.todayDate) {
-                        this.applicationStatus[i]["allowPopUpCancel"] = true;
-                    } else {
-                        this.applicationStatus[i]["allowPopUpCancel"] = false;
-                    }
+                    this.leaveApi.get_leavetype_entitlement_id(this.applicationStatus[i].entitlementId).subscribe(data => {
+                        if (new Date(this.applicationStatus[i].endDate) > this.todayDate) {
+                            this.applicationStatus[i]["allowPopUpCancel"] = true;
+                        } else {
+                            if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
+                                this.applicationStatus[i]["allowPopUpCancel"] = true;
+                            } else {
+                                this.applicationStatus[i]["allowPopUpCancel"] = false;
+                            }
+                        }
+                    })
                 }
             })
         })
