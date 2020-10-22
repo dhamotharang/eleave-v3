@@ -181,6 +181,12 @@ export class ApplyLeaveComponent implements OnInit {
      */
     public allowHalfQuarDay: boolean = true;
 
+    public allowShortNotice: boolean = false;
+
+    public makeAsEmergency: boolean = false;
+
+    public emergency: boolean = false;
+
     /**
      * Local private property for value get from API
      * @private
@@ -267,6 +273,16 @@ export class ApplyLeaveComponent implements OnInit {
     private _isExcludeRest: boolean;
 
     /**
+     * selected entitlement setup data
+     * @private
+     * @type {*}
+     * @memberof ApplyLeaveComponent
+     */
+    private _setupData: any;
+
+    private _arrayShortNotice: any;
+
+    /**
      * Creates an instance of ApplyLeaveComponent.
      * @param {APIService} apiService
      * @param {ActivatedRoute} route
@@ -326,10 +342,13 @@ export class ApplyLeaveComponent implements OnInit {
      */
     getPolicy(entitlementGUID: string) {
         this.leaveAPI.get_leavetype_entitlement_id(entitlementGUID).subscribe(data => {
+            this._setupData = data;
             this._isExcludePH = data.PROPERTIES_XML.excludeDayType.isExcludeHoliday;
             this._isExcludeRest = data.PROPERTIES_XML.excludeDayType.isExcludeRestDay;
             this.allowCertification = data.PROPERTIES_XML.attachmentRequired;
             this.allowHalfQuarDay = data.PROPERTIES_XML.applyFractionUnit;
+            this.allowShortNotice = data.PROPERTIES_XML.applyBeforeProperties.isAllowShortNotice.isCheck;
+            this.makeAsEmergency = data.PROPERTIES_XML.applyBeforeProperties.markAsEmergency;
         })
     }
     /**
@@ -439,6 +458,7 @@ export class ApplyLeaveComponent implements OnInit {
                         this.daysCount = 0;
                         this.minDate = '';
                         this.maxDate = '';
+                        this.emergency = false;
                         if (val.valid === true) {
                             this.leaveAPI.openSnackBar(val.message, true);
                             this.leaveAPI.get_entilement_details().subscribe(item => {
@@ -520,7 +540,45 @@ export class ApplyLeaveComponent implements OnInit {
         } else {
             this._reformatDateFrom = dayjs(this.applyLeaveForm.value.firstPicker).format('YYYY-MM-DD HH:mm:ss');
             this._reformatDateTo = dayjs(this.applyLeaveForm.value.secondPicker).format('YYYY-MM-DD HH:mm:ss');
-            this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday);
+            this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday, this._isExcludePH, this._isExcludeRest);
+            this.emergency = false;
+            if (this.allowShortNotice && this.makeAsEmergency) {
+                this._arrayShortNotice = [];
+                let start = new Date(dayjs(new Date()).add(1, 'day'));
+                while (start) {
+                    if (this._arrayShortNotice.length <= this._setupData.PROPERTIES_XML.applyBeforeProperties.numberOfDays) {
+                        if (this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday && this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay) {
+                            if (!this._weekDayNumber.includes(start.getDay()) && !this._holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
+                                this.daysCount++;
+                                this._arrayShortNotice.push(new Date(start));
+                            }
+                        }
+                        if (this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday && !this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay) {
+                            if (!this._weekDayNumber.includes(dayjs(start).format('YYYY-MM-DD'))) {
+                                this.daysCount++;
+                                this._arrayShortNotice.push(new Date(start));
+                            }
+                        }
+                        if (!this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday && this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay) {
+                            if (!this._weekDayNumber.includes(start.getDay())) {
+                                this.daysCount++;
+                                this._arrayShortNotice.push(new Date(start));
+                            }
+                        }
+                        if (!this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday && !this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay) {
+                            this.daysCount++;
+                            this._arrayShortNotice.push(new Date(start));
+                        }
+                        start.setDate(start.getDate() + 1);
+                        if (this._arrayShortNotice.length === this._setupData.PROPERTIES_XML.applyBeforeProperties.numberOfDays)
+                            break;
+                    }
+                }
+                this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay);
+                if (!(this._arrayShortNotice[this._arrayShortNotice.length - 1].getDate() < this._dateArray[0].getDate())) {
+                    this.emergency = true;
+                }
+            }
             this.dateSelection = this._dateArray;
             this.dayName = [];
             this._slot = []; this._selectedQuarterHour = []; this._firstForm = [];
@@ -601,32 +659,32 @@ export class ApplyLeaveComponent implements OnInit {
      * @returns
      * @memberof ApplyLeaveComponent
      */
-    getWeekDays(first: Date, last: Date, dayNumber: number[], holiday: any[]) {
+    getWeekDays(first: Date, last: Date, dayNumber: number[], holiday: any[], isExludePH, isExludeRest) {
         if (first > last) return -1;
         var start = new Date(first.getTime());
         var end = new Date(last.getTime());
         this.daysCount = 0;
         this._dateArray = [];
         while (start <= end) {
-            if (this._isExcludePH && this._isExcludeRest) {
+            if (isExludePH && isExludeRest) {
                 if (!dayNumber.includes(start.getDay()) && !holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
                     this.daysCount++;
                     this._dateArray.push(new Date(start));
                 }
             }
-            if (this._isExcludePH && !this._isExcludeRest) {
+            if (isExludePH && !isExludeRest) {
                 if (!holiday.includes(dayjs(start).format('YYYY-MM-DD'))) {
                     this.daysCount++;
                     this._dateArray.push(new Date(start));
                 }
             }
-            if (!this._isExcludePH && this._isExcludeRest) {
+            if (!isExludePH && isExludeRest) {
                 if (!dayNumber.includes(start.getDay())) {
                     this.daysCount++;
                     this._dateArray.push(new Date(start));
                 }
             }
-            if (!this._isExcludePH && !this._isExcludeRest) {
+            if (!isExludePH && !isExludeRest) {
                 this.daysCount++;
                 this._dateArray.push(new Date(start));
             }

@@ -85,6 +85,9 @@
                         <!-- <input matInput [(value)]="daysCount" disabled> -->
                     </div>
                     <!-- </mat-form-field> -->
+                    <p *ngIf="emergency"
+                        style="color: #43425d;font-size: 13px;font-weight: bold;opacity: 0.8;margin-top: 12px">
+                        Set as Emergency Leave</p>
                 </div>
                 <div [class]="'hide-sm-up'" style="margin-bottom: 15px;">
                     <mat-form-field class="date" appearance="outline" style="width: -webkit-fill-available;">
@@ -244,9 +247,11 @@
                     <mat-radio-group [value]="dayName[j]" (change)="dayNameChanged($event, j)">
                         <mat-radio-button value="0" color="primary" style="padding-right: 25px;" [checked]=true>Full Day
                         </mat-radio-button>
-                        <mat-radio-button value="1" color="primary" style="padding-right: 25px;" *ngIf="allowHalfQuarDay">Half Day
+                        <mat-radio-button value="1" color="primary" style="padding-right: 25px;"
+                            *ngIf="allowHalfQuarDay">Half Day
                         </mat-radio-button>
-                        <mat-radio-button value="2" color="primary" style="padding-right: 25px;" *ngIf="allowHalfQuarDay">Quarter Day
+                        <mat-radio-button value="2" color="primary" style="padding-right: 25px;"
+                            *ngIf="allowHalfQuarDay">Quarter Day
                         </mat-radio-button>
                     </mat-radio-group>
                     <mat-form-field style="width: 35%;height: 60px;" appearance="outline">
@@ -299,7 +304,8 @@
                     style="display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"
                     [href]="uploadedFile.link" download>{{uploadedFile.filename}}</a>
                 <input style="display:none" #file name="file" type="file" (change)="uploadEvent($event.target.files)">
-                <p *ngIf="allowCertification" style="color: #808495;font-size:11px;margin-bottom: 15px;">File Allowed: .jpg,
+                <p *ngIf="allowCertification" style="color: #808495;font-size:11px;margin-bottom: 15px;">File Allowed:
+                    .jpg,
                     .png, .pdf only
                 </p>
                 <mat-form-field class="reasonBox" appearance="outline" style="width: 98%;">
