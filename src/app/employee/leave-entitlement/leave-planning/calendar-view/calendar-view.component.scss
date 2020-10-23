@@ -1,11 +1,4 @@
 :host {
-  .app-calendar {
-    // max-width: 900px;
-    width: 50%;
-    margin-top: 20px;
-    margin-bottom: 1%;
-    display: inline-block;
-  }
   ::ng-deep.fc-content-skeleton {
     min-height: 20px;
   }
@@ -21,9 +14,12 @@
     width: 100%;
     padding-top: 5px;
     background: #f5f6fa;
-    margin-left: 10px;
+    margin-left: 0px;
     height: 42px;
     padding-left: 15px;
+  }
+  ::ng-deep .mobileItem {
+    --padding-start: 0;
   }
   .divider {
     --min-height: none;
@@ -106,13 +102,13 @@
     background-color: #e9e9f0;
     color: #a3a6b4;
   }
-  ::ng-deep .fc-content{
-    color:white;
+  ::ng-deep .fc-content {
+    color: white;
     cursor: default;
     white-space: normal;
   }
-  ::ng-deep .fc-content:hover{
-    color:white;
+  ::ng-deep .fc-content:hover {
+    color: white;
     cursor: default;
   }
   ::ng-deep .fc-more {

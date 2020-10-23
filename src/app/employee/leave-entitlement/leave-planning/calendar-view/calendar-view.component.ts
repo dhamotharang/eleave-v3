@@ -116,7 +116,8 @@ export class CalendarViewComponent implements OnInit {
      * @param {LeavePlanningAPIService} leaveAPI
      * @memberof CalendarViewComponent
      */
-    constructor(private apiService: APIService, private leaveAPI: LeavePlanningAPIService) { }
+    constructor(private apiService: APIService, private leaveAPI: LeavePlanningAPIService) {
+    }
 
     /**
      * detect change of view calendar tab
@@ -234,6 +235,7 @@ export class CalendarViewComponent implements OnInit {
         setTimeout(() => {
             let calendarView = this.calendar.getApi();
             calendarView.render();
+            window.dispatchEvent(new Event('resize'));
         }, 100);
     }
 
