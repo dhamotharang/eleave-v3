@@ -233,7 +233,7 @@ export class EmploymentDetailsComponent implements OnInit {
             // });
         },
             err => {
-                this.snackbarMsg(JSON.parse(err._body).message[0].constraints.isNotEmpty, false);
+                this.snackbarMsg(Object.values(JSON.parse(err._body).message[0].constraints)[0], false);
             })
     }
 
@@ -243,7 +243,7 @@ export class EmploymentDetailsComponent implements OnInit {
      * @param {boolean} value
      * @memberof EmploymentDetailsComponent
      */
-    snackbarMsg(statement: string, value: boolean) {
+    snackbarMsg(statement: any, value: boolean) {
         this.apiService.snackbar.openFromComponent(SnackbarNotificationComponent, {
             duration: 5000,
             verticalPosition: "top",

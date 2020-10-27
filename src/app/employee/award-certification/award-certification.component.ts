@@ -214,7 +214,7 @@ export class AwardCertificationComponent implements OnInit {
             this.msgNotification('Edit mode disabled. Good job!', true);
         },
             response => {
-                this.msgNotification(JSON.parse(response._body).message[0].constraints.isNotEmpty, false);
+                this.msgNotification(Object.values(JSON.parse(response._body).message[0].constraints)[0], false);
             })
     }
 
@@ -262,7 +262,7 @@ export class AwardCertificationComponent implements OnInit {
      * @param {boolean} value
      * @memberof EmploymentDetailsComponent
      */
-    msgNotification(statement: string, value: boolean) {
+    msgNotification(statement: any, value: boolean) {
         this.apiService.snackbar.openFromComponent(SnackbarNotificationComponent, {
             duration: 5000,
             verticalPosition: "top",

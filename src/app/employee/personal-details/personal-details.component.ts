@@ -343,7 +343,11 @@ export class PersonalDetailsComponent implements OnInit {
                 this.notification('Edit mode disabled. Good job!', true);
             },
             response => {
-                this.notification(JSON.parse(response._body).message[0].constraints.isNotEmpty, false);
+                if (Object.values(JSON.parse(response._body).message[0].constraints)[0] === 'emailAddress should not be empty') {
+                    this.notification('one email address is required', false);
+                } else {
+                    this.notification(Object.values(JSON.parse(response._body).message[0].constraints)[0], false);
+                }
             });
     }
 
@@ -390,7 +394,7 @@ export class PersonalDetailsComponent implements OnInit {
      * @param {boolean} val
      * @memberof PersonalDetailsComponent
      */
-    notification(text: string, val: boolean) {
+    notification(text: any, val: boolean) {
         this.apiService.snackbar.openFromComponent(SnackbarNotificationComponent, {
             duration: 5000,
             verticalPosition: "top",
