@@ -225,6 +225,13 @@ export class PersonalDetailsComponent implements OnInit {
         else if (!(this.items.personalDetail.emergencyContact.contacts instanceof Array) && this.items.personalDetail.emergencyContact.contacts !== undefined) {
             this.removeItems.push(this.items.personalDetail.emergencyContact.contacts);
         }
+        else if (this.items.personalDetail.emergencyContact == '') {
+            this.removeItems.push({
+                "contactName": "",
+                "contactRelationship": "",
+                "contactNumber": ""
+            });
+        }
         else {
             this.removeItems = this.items.personalDetail.emergencyContact.contacts;
         }
@@ -240,6 +247,12 @@ export class PersonalDetailsComponent implements OnInit {
         }
         else if (!(this.items.personalDetail.family.spouse instanceof Array) && this.items.personalDetail.family.spouse !== undefined) {
             this.spouseItems.push(this.items.personalDetail.family.spouse);
+        }
+        else if (this.items.personalDetail.family == '') {
+            this.spouseItems.push({
+                "spouseName": "",
+                "spouseIdentificationNumber": ""
+            });
         } else {
             this.spouseItems = this.items.personalDetail.family.spouse;
         }
@@ -255,6 +268,12 @@ export class PersonalDetailsComponent implements OnInit {
         }
         else if (!(this.items.personalDetail.family.child instanceof Array) && this.items.personalDetail.family.child !== undefined) {
             this.childItems.push(this.items.personalDetail.family.child);
+        }
+        else if (this.items.personalDetail.family.child == undefined) {
+            this.childItems.push({
+                "childName": "",
+                "childIdentificationNumber": ""
+            });
         } else {
             this.childItems = this.items.personalDetail.family.child;
         }
@@ -270,7 +289,15 @@ export class PersonalDetailsComponent implements OnInit {
         }
         else if (!(this.items.personalDetail.education.educationDetail instanceof Array) && this.items.personalDetail.education.educationDetail !== undefined) {
             this.eduList.push(this.items.personalDetail.education.educationDetail);
-        } else {
+        } else if (this.items.personalDetail.education == '') {
+            this.eduList.push({
+                "qualificationLevel": "",
+                "major": "",
+                "university": "",
+                "year": ""
+            });
+        }
+        else {
             this.eduList = this.items.personalDetail.education.educationDetail;
         }
     }
