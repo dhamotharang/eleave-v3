@@ -471,7 +471,7 @@
                             <ion-col>
                                 <div class="delete-icon" *ngIf="modeValue === 'ON'"
                                     [inlineSVG]="'assets/icon/option/trash.svg'"
-                                    (click)="removeItem(index, removeItems)">
+                                    (click)="removeItem(index, removeItems);isBlur = true">
                                 </div>
                             </ion-col>
                         </ion-row>
@@ -523,7 +523,7 @@
                         </ion-col>
                         <ion-col *ngIf="modeValue === 'ON'" size="1" style="align-self: center;">
                             <div class="delete-icon" [inlineSVG]="'assets/icon/option/trash.svg'"
-                                (click)="removeItem(index, removeItems)">
+                                (click)="removeItem(index, removeItems); isBlur = true">
                             </div>
                         </ion-col>
                     </ion-grid>
@@ -589,7 +589,7 @@
                         <ion-col></ion-col>
                         <ion-col>
                             <div class="delete-icon" *ngIf="modeValue === 'ON'"
-                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, spouseItems)">
+                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, spouseItems);isBlur = true">
                             </div>
                         </ion-col>
                     </ion-row>
@@ -644,7 +644,7 @@
                         <ion-col></ion-col>
                         <ion-col>
                             <div class="delete-icon" *ngIf="modeValue === 'ON'"
-                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, childItems)">
+                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, childItems);isBlur = true">
                             </div>
                         </ion-col>
                     </ion-row>
@@ -716,7 +716,7 @@
                         </ion-col>
                         <ion-col size="1">
                             <div class="education-delete-icon" *ngIf="modeValue === 'ON'"
-                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, eduList)">
+                                [inlineSVG]="'assets/icon/option/trash.svg'" (click)="removeItem(index, eduList);isBlur = true">
                             </div>
                             <!-- <div class="education-edit-pencil-icon" *ngIf="!displayEditEdu[index]"
                                 [inlineSVG]="'assets/icon/option/pencil.svg'" (click)="editEducation(index, true)">
@@ -805,7 +805,7 @@
                         </ion-col>
                         <ion-col *ngIf="modeValue === 'ON'" size="1" style="align-self: center;">
                             <div class="education-delete-icon" [inlineSVG]="'assets/icon/option/trash.svg'"
-                                (click)="removeItem(index, eduList)">
+                                (click)="removeItem(index, eduList);isBlur = true">
                             </div>
                         </ion-col>
 

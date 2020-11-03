@@ -225,7 +225,7 @@ export class PersonalDetailsComponent implements OnInit {
         else if (!(this.items.personalDetail.emergencyContact instanceof Array) && this.items.personalDetail.emergencyContact !== undefined) {
             this.removeItems.push(this.items.personalDetail.emergencyContact);
         }
-        else if (this.items.personalDetail.emergencyContact == '') {
+        else if (this.items.personalDetail.emergencyContact == '' || this.items.personalDetail.emergencyContact == undefined) {
             this.removeItems.push({
                 "contactName": "",
                 "contactRelationship": "",
@@ -248,7 +248,7 @@ export class PersonalDetailsComponent implements OnInit {
         else if (!(this.items.personalDetail.family.spouse instanceof Array) && this.items.personalDetail.family.spouse !== undefined) {
             this.spouseItems.push(this.items.personalDetail.family.spouse);
         }
-        else if (this.items.personalDetail.family == '') {
+        else if (this.items.personalDetail.family == '' || this.items.personalDetail.family == undefined) {
             this.spouseItems.push({
                 "spouseName": "",
                 "spouseIdentificationNumber": ""
@@ -284,12 +284,12 @@ export class PersonalDetailsComponent implements OnInit {
      * @memberof PersonalDetailsComponent
      */
     initEducation() {
-        if ((this.items.personalDetail.education.educationDetail instanceof Array) && this.items.personalDetail.education.educationDetail !== undefined) {
-            this.eduList = (this.items.personalDetail.education.educationDetail);
+        if ((this.items.personalDetail.education instanceof Array) && this.items.personalDetail.education !== undefined) {
+            this.eduList = (this.items.personalDetail.education);
         }
-        else if (!(this.items.personalDetail.education.educationDetail instanceof Array) && this.items.personalDetail.education.educationDetail !== undefined) {
-            this.eduList.push(this.items.personalDetail.education.educationDetail);
-        } else if (this.items.personalDetail.education == '') {
+        else if (!(this.items.personalDetail.education instanceof Array) && this.items.personalDetail.education !== undefined) {
+            this.eduList.push(this.items.personalDetail.education);
+        } else if (this.items.personalDetail.education == '' || this.items.personalDetail.education == undefined) {
             this.eduList.push({
                 "qualificationLevel": "",
                 "major": "",
@@ -298,7 +298,7 @@ export class PersonalDetailsComponent implements OnInit {
             });
         }
         else {
-            this.eduList = this.items.personalDetail.education.educationDetail;
+            this.eduList = this.items.personalDetail.education;
         }
     }
 
