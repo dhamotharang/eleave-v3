@@ -194,6 +194,19 @@ export class AwardCertificationComponent implements OnInit {
         body.gender = this.items.personalDetail.gender;
         body.maritalStatus = this.items.personalDetail.maritalStatus;
         body.postcode = Number(this.items.personalDetail.postcode);
+        if (body.emergencyContact == undefined || body.emergencyContact == '') {
+            body['emergencyContact'] = {};
+            body['emergencyContact'] = [];
+        }
+        if (body.education == undefined || body.education == '') {
+            body['education'] = {};
+            body['education'] = [];
+        }
+        if (body.family == undefined || body.family == '') {
+            body['family'] = {};
+            body['family']["spouse"] = [];
+            body['family']["child"] = [];
+        }
         if (body.certification != undefined) {
             body.certification = this.awards;
         } else {

@@ -59,6 +59,13 @@ export class PersonalDetailsComponent implements OnInit {
     public eduList: any = [];
 
     /**
+     * Empty array to save certification info
+     * @type {*}
+     * @memberof PersonalDetailsComponent
+     */
+    public awards: any = [];
+
+    /**
      * Local property to show or hide header of profile completeness
      * @type {boolean}
      * @memberof PersonalDetailsComponent
@@ -174,6 +181,7 @@ export class PersonalDetailsComponent implements OnInit {
                 this.initSpouse();
                 this.initChild();
                 this.initEducation();
+                this.initCertification();
                 this.apiService.get_employment_details(this.items.id).subscribe(
                     data => {
                         this.employ = data;
@@ -302,6 +310,24 @@ export class PersonalDetailsComponent implements OnInit {
         }
     }
 
+    initCertification() {
+        if ((this.items.personalDetail.certification instanceof Array) && this.items.personalDetail.certification !== undefined) {
+            this.awards = (this.items.personalDetail.certification);
+        }
+        else if (!(this.items.personalDetail.certification instanceof Array) && this.items.personalDetail.certification !== undefined) {
+            this.awards.push(this.items.personalDetail.certification);
+        } else if (this.items.personalDetail.certification == "" || this.items.personalDetail.certification == undefined) {
+            this.awards.push({
+                "certificationName": "",
+                "certificationEnrollYear": "",
+                "certificationGraduateYear": "",
+                "certificationAttachment": ""
+            });
+        } else {
+            this.awards = this.items.personalDetail.certification;
+        }
+    }
+
     /**
      * This is method used to create new form
      * @param {*} data
@@ -406,7 +432,7 @@ export class PersonalDetailsComponent implements OnInit {
             "state": this.items.personalDetail.state,
             "country": this.items.personalDetail.country,
             "emergencyContact": this.removeItems,
-            "certification": this.items.personalDetail.certification,
+            "certification": this.awards,
             "education": this.eduList,
             "family": {
                 "spouse": this.spouseItems,
