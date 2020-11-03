@@ -219,11 +219,11 @@ export class PersonalDetailsComponent implements OnInit {
      * @memberof PersonalDetailsComponent
      */
     initContact() {
-        if ((this.items.personalDetail.emergencyContact.contacts instanceof Array) && this.items.personalDetail.emergencyContact.contacts !== undefined) {
-            this.removeItems = (this.items.personalDetail.emergencyContact.contacts);
+        if ((this.items.personalDetail.emergencyContact instanceof Array) && this.items.personalDetail.emergencyContact !== undefined) {
+            this.removeItems = (this.items.personalDetail.emergencyContact);
         }
-        else if (!(this.items.personalDetail.emergencyContact.contacts instanceof Array) && this.items.personalDetail.emergencyContact.contacts !== undefined) {
-            this.removeItems.push(this.items.personalDetail.emergencyContact.contacts);
+        else if (!(this.items.personalDetail.emergencyContact instanceof Array) && this.items.personalDetail.emergencyContact !== undefined) {
+            this.removeItems.push(this.items.personalDetail.emergencyContact);
         }
         else if (this.items.personalDetail.emergencyContact == '') {
             this.removeItems.push({
@@ -233,7 +233,7 @@ export class PersonalDetailsComponent implements OnInit {
             });
         }
         else {
-            this.removeItems = this.items.personalDetail.emergencyContact.contacts;
+            this.removeItems = this.items.personalDetail.emergencyContact;
         }
     }
 
@@ -405,9 +405,9 @@ export class PersonalDetailsComponent implements OnInit {
             "city": this.items.personalDetail.city,
             "state": this.items.personalDetail.state,
             "country": this.items.personalDetail.country,
-            "emergencyContact": { "contacts": this.removeItems },
+            "emergencyContact": this.removeItems,
             "certification": this.items.personalDetail.certification,
-            "education": { "educationDetail": this.eduList },
+            "education": this.eduList,
             "family": {
                 "spouse": this.spouseItems,
                 "child": this.childItems
