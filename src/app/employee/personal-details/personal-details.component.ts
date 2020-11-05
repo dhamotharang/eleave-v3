@@ -396,11 +396,7 @@ export class PersonalDetailsComponent implements OnInit {
                 this.notification('Edit mode disabled. Good job!', true);
             },
             response => {
-                if (Object.values(JSON.parse(response._body).message[0].constraints)[0] === 'emailAddress should not be empty') {
-                    this.notification('one email address is required', false);
-                } else {
-                    this.notification(Object.values(JSON.parse(response._body).message[0].constraints)[0], false);
-                }
+                this.notification(Object.values(JSON.parse(response._body).message[0].constraints)[0], false);
             });
     }
 

@@ -227,7 +227,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.emailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <input matInput [(ngModel)]="items.personalDetail.emailAddress"
-                                    placeholder="Personal Email Address" (blur)="isBlur = true" required>
+                                    placeholder="Personal Email Address" (blur)="isBlur = true">
                             </mat-form-field>
 
                         </ion-col>
@@ -322,7 +322,7 @@
                             <p *ngIf="modeValue === 'OFF'">{{items.personalDetail.emailAddress}}</p>
                             <mat-form-field *ngIf="modeValue === 'ON'">
                                 <input matInput [(ngModel)]="items.personalDetail.emailAddress"
-                                    placeholder="Personal Email Address" (blur)="isBlur = true" required>
+                                    placeholder="Personal Email Address" (blur)="isBlur = true">
                             </mat-form-field>
                         </ion-col>
                     </ion-row>
