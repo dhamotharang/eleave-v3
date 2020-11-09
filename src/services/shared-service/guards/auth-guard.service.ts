@@ -31,6 +31,7 @@ export class AuthGuard implements CanActivate {
     if (this._authService.isAuthenticated()) {
       return true;
     }
+    alert('Your session has expired. Please login to continue your last access page.');
     // Store the attempted URL for redirecting
     this._authService.redirectUrl = url;
 
@@ -40,6 +41,7 @@ export class AuthGuard implements CanActivate {
         returnUrl: this._authService.redirectUrl
       }
     });
+    this._authService.logout();
     return false;
   }
 

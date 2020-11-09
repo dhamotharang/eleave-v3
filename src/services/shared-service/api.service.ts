@@ -43,7 +43,7 @@ export class APIService {
      * @memberof APIService
      */
     headerAuthorization() {
-        if (this.headers["_headers"].size != 1 && this.auth.isAuthenticated) {
+        if (this.headers["_headers"].size != 1 && this.auth.isAuthenticated()=== true) {
             this.headers.append('Authorization', 'JWT ' + JSON.parse(this.local.get('access_token')));
         }
     }

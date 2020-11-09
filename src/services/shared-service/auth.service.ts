@@ -46,18 +46,7 @@ export class AuthService {
      * @return {boolean}
      */
     isAuthenticated(): boolean {
-        return this.local.get('access_token') != null && !this.isTokenExpired();
-    }
-
-    // simulate jwt token is valid
-    // https://github.com/theo4u/angular4-auth/blob/master/src/app/helpers/jwt-helper.ts
-    /**
-     * return false if token is expired
-     * @returns {boolean}
-     * @memberof AuthService
-     */
-    isTokenExpired(): boolean {
-        return false;
+        return this.local.get('timer') != null && this.local.get('timer') > Date.now();
     }
 
     /**
@@ -75,7 +64,7 @@ export class AuthService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     this.local.set('access_token', JSON.stringify(user.access_token));
                     this.local.set('loginType', user.login_type);
-                    // this.isAuthenticated();
+                    this.local.set('timer', Date.now() + (user.expires_in * 1000));
                     if (this.redirectUrl) {
                         this.router.navigate([this.redirectUrl]);
                         this.redirectUrl = null;
@@ -83,8 +72,13 @@ export class AuthService {
                         this.router.navigate(['main']);
                     }
                     setTimeout(() => {
-                        this.isTokenExpired();
-                        this.isAuthenticated();
+                        alert('Your session has expired. Please login to continue your last access page.');
+                        this.redirectUrl = this.router.url;
+                        this.router.navigate([''], {
+                            queryParams: {
+                                returnUrl: this.redirectUrl
+                            }
+                        });
                         this.logout();
                     }, user.expires_in * 1000);
                 }
@@ -93,19 +87,9 @@ export class AuthService {
     }
 
     /**
-     * return access token or vice versa
-     * @readonly
-     * @type {boolean}
-     * @memberof AuthService
-     */
-    public get loggedIn(): boolean {
-        return (this.local.get('access_token') !== null);
-    }
-
-    /**
      * this is used to clear local storage and also the route to login
      */
     logout(): void {
-        this.local.remove('access_token');
+        this.local.clear();
     }
 }
