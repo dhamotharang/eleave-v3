@@ -572,6 +572,8 @@ export class ApplyLeaveComponent implements OnInit {
                         start.setDate(start.getDate() + 1);
                         if (this._arrayShortNotice.length === this._setupData.PROPERTIES_XML.applyBeforeProperties.numberOfDays)
                             break;
+                    } else {
+                        break;
                     }
                 }
                 this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay);
