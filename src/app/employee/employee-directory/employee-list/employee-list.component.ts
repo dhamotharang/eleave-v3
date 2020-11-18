@@ -104,7 +104,7 @@ export class EmployeeListComponent implements OnInit {
         this.apiService.get_user_profile_list().subscribe(
             (data: any[]) => {
                 this.items = data;
-
+                this.nameSorting(true, -1, 1);
                 this.showSpinner = false;
             }
         );
@@ -198,6 +198,7 @@ export class EmployeeListComponent implements OnInit {
         this.apiService.get_user_profile_list().subscribe(
             (data: any[]) => {
                 this.items = data;
+                this.nameSorting(true, -1, 1);
                 this.showSpinner = false;
             }
         );

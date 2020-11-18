@@ -172,6 +172,11 @@ export class CalendarViewComponent implements OnInit {
      */
     async getOnLeaveList(date: Date) {
         this.onLeaveList = await this.leaveAPI.get_calendar_onleave_list({ 'enddate': dayjs(date).format('YYYY-MM-DD'), 'startdate': dayjs(date).format('YYYY-MM-DD') }).toPromise();
+        this.onLeaveList.sort(function (a: any, b: any) {
+            const x = a.FULLNAME.toUpperCase();
+            const y = b.FULLNAME.toUpperCase();
+            return x < y ? -1 : x > y ? 1 : 0;
+        });
     }
 
     /**
