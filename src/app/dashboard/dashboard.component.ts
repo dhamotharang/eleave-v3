@@ -174,6 +174,8 @@ export class DashboardComponent implements OnInit {
      */
     public needScroll: boolean = false;
 
+    public todayLeave = [];
+
     /**
      * reason value get from confirmation pop up
      * @private
@@ -315,7 +317,7 @@ export class DashboardComponent implements OnInit {
                 this.applicationStatus = val;
                 for (let i = 0; i < this.applicationStatus.length; i++) {
                     this.leaveApi.get_leavetype_entitlement_id(this.applicationStatus[i].entitlementId).subscribe(data => {
-                        if (new Date(this.applicationStatus[i].endDate) > this.todayDate) {
+                        if (new Date(this.applicationStatus[i].endDate) >= this.todayDate) {
                             this.applicationStatus[i]["allowPopUpCancel"] = true;
                         } else {
                             if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
@@ -390,6 +392,11 @@ export class DashboardComponent implements OnInit {
                 this.holidays[i].start = (dayjs(this.holidays[i].start).format('DD MMM YYYY'));
             }
         })
+        this.leaveApi.get_calendar_onleave_list({ 'enddate': dayjs(new Date()).format('YYYY-MM-DD'), 'startdate': dayjs(new Date()).format('YYYY-MM-DD') }).
+            subscribe(data => {
+                this.todayLeave = data;
+                console.log(data)
+            });
     }
 
     /**
