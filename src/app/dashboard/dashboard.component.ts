@@ -63,6 +63,20 @@ export class DashboardComponent implements OnInit {
     public showViewLessButton: boolean = false;
 
     /**
+     * show all today's on leave list
+     * @type {boolean}
+     * @memberof DashboardComponent
+     */
+    public showallLeave: boolean = false;
+
+    /**
+     * show view less button
+     * @type {boolean}
+     * @memberof DashboardComponent
+     */
+    public showViewLessLeave: boolean = false;
+
+    /**
      * show all announcements
      * @type {boolean}
      * @memberof DashboardComponent

@@ -232,6 +232,86 @@
 </ion-menu>
 <ion-router-outlet id="holidayMenuContent"></ion-router-outlet>
 
+<!-------------------------------- show who's on leave menu---------------------------------->
+<ion-menu contentId="onLeaveMenuContent" side="end" type="overlay" menuId="viewOnLeaveDetails"
+    (ionDidClose)="menuOpen=false">
+    <ion-header style="background-color:#43425d; color: #fcfcfc;">
+        <img style="margin: 17px;width: 22px;height: 17px;float:left"
+            src="assets/icon/dashboard/icon All Holidays@3x.png">
+        <p style="line-height: 1.27;font-size: 11px;color: #fcfcfc;font-weight: bold;margin: 20px;">ALL ON LEAVE
+            EMPLOYEES TODAY</p>
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+            <ng-container *ngFor="let item of todayLeave; let i = index;">
+                <ion-item *ngIf="i<6 && showallLeave===false">
+                    <ion-row style="width: 100%;padding-bottom: 10px;">
+                        <ion-col size="7.5" style="padding-top: 15px;color:#4d4f5c;font-size:11px;">
+                            <strong>Name:</strong>
+                            {{item.FULLNAME}}
+                            <p style="margin:0;color:#4d4f5c; font-size:11px;">
+                                <strong>Staff ID:</strong> {{item.STAFF_ID}}
+                            </p>
+                            <p style="margin:0;color:#4d4f5c; font-size:11px;">
+                                <strong>Leave Type:</strong> {{item.CODE}}<span *ngIf="item.TIME_SLOT != null"> - {{item.TIME_SLOT}}</span>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-center style="text-align: right;">
+                            <mat-chip-list>
+                                <mat-chip
+                                    [ngClass]="{
+                                    'approvedColor': item.STATUS == 'APPROVED', 'pendingColor': item.STATUS == 'PENDING'}">
+                                    <p
+                                        style="margin-bottom: 0;white-space: nowrap;width: 100%;text-align: center;color: #ffffff;font-size: 9px;line-height: 2.22;">
+                                        {{item.STATUS}}</p>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item *ngIf="showallLeave">
+                    <ion-row style="width: 100%;padding-bottom: 10px;">
+                        <ion-col size="7.5" style="padding-top: 15px;color:#4d4f5c;font-size:11px;">
+                            <strong>Name:</strong>
+                            {{item.FULLNAME}}
+                            <p style="margin:0;color:#4d4f5c; font-size:11px;">
+                                <strong>Staff ID:</strong> {{item.STAFF_ID}}
+                            </p>
+                            <p style="margin:0;color:#4d4f5c; font-size:11px;">
+                                <strong>Leave Type:</strong> {{item.CODE}}<span *ngIf="item.TIME_SLOT != null"> - {{item.TIME_SLOT}}</span>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-center style="text-align: right;">
+                            <mat-chip-list>
+                                <mat-chip
+                                    [ngClass]="{
+                                    'approvedColor': item.STATUS == 'APPROVED', 'pendingColor': item.STATUS == 'PENDING'}">
+                                    <p
+                                        style="margin-bottom: 0;white-space: nowrap;width: 100%;text-align: center;color: #ffffff;font-size: 9px;line-height: 2.22;">
+                                        {{item.STATUS}}</p>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+            </ng-container>
+        </ion-list>
+
+        <div style="text-align: center;margin:30px" *ngIf="todayLeave && todayLeave.length > 6">
+            <ion-button *ngIf="!showViewLessLeave" (click)="showallLeave = true; showViewLessLeave = true"
+                style="font-size: 11px;height: 30px;width:124px;cursor: pointer;text-transform: none;" color="primary">
+                View More
+            </ion-button>
+            <ion-button *ngIf="showViewLessLeave" (click)="showallLeave = false; showViewLessLeave = false"
+                style="font-size: 11px;height: 30px;width:124px;cursor: pointer;text-transform: none;" color="primary">
+                View Less
+            </ion-button>
+        </div>
+    </ion-content>
+</ion-menu>
+<ion-router-outlet id="onLeaveMenuContent"></ion-router-outlet>
+
 
 <!-- ------------------------------ Dashboard content ------------------------------- -->
 <div class="main" #destination [scrollTop]="needScroll == true ? destination.scrollHeight : 0">
@@ -254,8 +334,7 @@
                     style="float:left;color: #ff6768;opacity: 0.8;font-weight: bold;font-size: 11px;line-height: 1.36;margin-top: 5px;">
                     {{annualVal.BALANCE_DAYS | number : '1.2-2'}} Expiring in {{annualDaysToGo}} days
                 </p>
-                <p (click)="menuOpen=true;menu.enable(true, 'viewAnnualDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.open('viewAnnualDetails');"
-                    (click)="menuOpen=true;menu.enable(true, 'viewAnnualDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.open('viewAnnualDetails');"
+                <p (click)="menuOpen=true;menu.enable(true, 'viewAnnualDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.open('viewAnnualDetails');"
                     style="cursor: pointer;margin-top: 5px;float: right;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
                     View
                     Details</p>
@@ -278,7 +357,7 @@
                     {{replaceVal | number : '1.2-2'}} Expiring in {{RLDaysToGo}} days
                 </p>
 
-                <p (click)="menuOpen=true;menu.enable(true, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.open('viewReplacementDetails');"
+                <p (click)="menuOpen=true;menu.enable(true, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.open('viewReplacementDetails');"
                     style="cursor: pointer;margin-top: 5px;float: right;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
                     View
                     Details</p>
@@ -322,7 +401,7 @@
                 <div
                     style="font-size: 12px;width:100%;background: #f5f6fa;padding: 10px;padding-left: 15px;color: #a3a6b4;font-weight: bold;">
                     LATEST ANNOUNCEMENT<p *ngIf="announcements.length !== 0"
-                        (click)="menuOpen=true;menu.enable(true, 'viewAnnouncementDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewHolidayDetails');menu.open('viewAnnouncementDetails');"
+                        (click)="menuOpen=true;menu.enable(true, 'viewAnnouncementDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.open('viewAnnouncementDetails');"
                         style="cursor: pointer;margin-top: 0px;float: right;margin-right: 5px;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
                         View Details</p>
                 </div>
@@ -355,7 +434,7 @@
             <div style="background-color: #ffffff;padding: 10px;">
                 <div
                     style="font-size: 12px;width:100%;background: #f5f6fa;padding: 10px;padding-left: 15px;color: #a3a6b4;font-weight: bold;">
-                    UPCOMING HOLIDAYS<p *ngIf="holidays.length !== 0" (click)="menuOpen=true;menu.enable(true, 'viewHolidayDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');
+                    UPCOMING HOLIDAYS<p *ngIf="holidays.length !== 0" (click)="menuOpen=true;menu.enable(true, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');
                 menu.enable(false, 'viewAnnouncementDetails');menu.open('viewHolidayDetails');"
                         style="cursor: pointer;margin-top: 0px;float: right;margin-right: 5px;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
                         View Details</p>
@@ -383,6 +462,47 @@
                     <p *ngIf="holidays.length === 0"
                         style="padding-left: 15px;color: rgb(77, 79, 92);font-size: 11px;line-height: 1.82;">
                         No upcoming holiday</p>
+                </ng-container>
+            </div>
+        </div>
+        <div class="onleave">
+            <div style="background-color: #ffffff;padding: 10px;">
+                <div
+                    style="font-size: 12px;width:100%;background: #f5f6fa;padding: 10px;padding-left: 15px;color: #a3a6b4;font-weight: bold;">
+                    WHO'S ON LEAVE TODAY<p *ngIf="todayLeave.length !== 0" (click)="menuOpen=true;menu.enable(true, 'viewOnLeaveDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');
+                menu.enable(false, 'viewAnnouncementDetails');menu.open('viewOnLeaveDetails');"
+                        style="cursor: pointer;margin-top: 0px;float: right;margin-right: 5px;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
+                        View Details</p>
+                </div>
+                <ion-row style="width: 100%;" *ngFor="let item of todayLeave; let i = index;">
+                    <ng-container style="padding-top: 2%;" *ngIf="i<3">
+                        <ion-col size="1.3" style="padding-left: 15px;color:#4d4f5c;font-size:11px;line-height: 1.82;">
+                            <ion-label>{{item.STAFF_ID}}</ion-label>
+                        </ion-col>
+                        <ion-col size="4.5" style="padding-left: 15px;color:#4d4f5c;font-size:11px;line-height: 1.82;">
+                            <ion-label>{{item.FULLNAME}}</ion-label>
+                        </ion-col>
+                        <ion-col size="2" style="color:#4d4f5c;font-size:11px;line-height: 1.82;">{{item.ABBR}}<span *ngIf="item.TIME_SLOT != null"> - {{item.TIME_SLOT}}</span>
+                        </ion-col>
+                        <ion-col style="overflow: hidden;text-align: right;margin-right: 10px;">
+                            <mat-chip-list>
+                                <mat-chip
+                                    [ngClass]="{
+                                    'approvedColor': item.STATUS == 'APPROVED', 'pendingColor': item.STATUS == 'PENDING'}">
+                                    <p
+                                        style="margin-bottom: 0;white-space: nowrap;width: 100%;text-align: center;color: #ffffff;font-size: 9px;line-height: 2.22;">
+                                        {{item.STATUS}}</p>
+                                </mat-chip>
+                            </mat-chip-list>
+                        </ion-col>
+
+                        <ion-item *ngIf="i<2" class="divider" lines="full"></ion-item>
+                    </ng-container>
+                </ion-row>
+                <ng-container>
+                    <p *ngIf="todayLeave.length === 0"
+                        style="padding-left: 15px;color: rgb(77, 79, 92);font-size: 11px;line-height: 1.82;">
+                        No leave application today</p>
                 </ng-container>
             </div>
         </div>
