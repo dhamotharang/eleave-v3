@@ -295,7 +295,7 @@ export class SideMenuNavigationComponent implements OnInit {
    * @memberof SideMenuNavigationComponent
    */
   logout(event) {
-    window.location.href = '/login';
+    window.location.href = '/';
     // this.router.navigate(['/']);
     localStorage.clear();
   }
