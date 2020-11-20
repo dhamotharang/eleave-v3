@@ -406,10 +406,13 @@ export class DashboardComponent implements OnInit {
                 this.holidays[i].start = (dayjs(this.holidays[i].start).format('DD MMM YYYY'));
             }
         })
-        this.leaveApi.get_calendar_onleave_list({ 'enddate': dayjs(new Date()).format('YYYY-MM-DD'), 'startdate': dayjs(new Date()).format('YYYY-MM-DD') }).
+        this.leaveApi.get_calendar_onleave_list({ 'enddate': dayjs(new Date('2020-11-30')).format('YYYY-MM-DD'), 'startdate': dayjs(new Date('2020-11-01')).format('YYYY-MM-DD') }).
             subscribe(data => {
                 this.todayLeave = data;
-                console.log(data)
+                let newList = this.todayLeave.filter(element => {
+                    return (element.STATUS.indexOf('APPROVED') > -1);
+                })
+                this.todayLeave = newList;
             });
     }
 
