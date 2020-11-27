@@ -300,8 +300,11 @@
                     style="--border-radius: 2px;background: #f5f6fa;height: 30px; min-width: 40%;font-size: 12px;text-transform: none">
                     Upload Attachment
                 </ion-button>
+                <p *ngIf="allowCertification && uploadedFile == undefined" style="color: #f44336;font-size:11px;">
+                    Attachment is mandatory
+                </p>
                 <a *ngIf="uploadedFile != undefined"
-                    style="display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"
+                    style="color: #7069d8;display: block;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"
                     [href]="uploadedFile.link" download>{{uploadedFile.filename}}</a>
                 <input style="display:none" #file name="file" type="file" (change)="uploadEvent($event.target.files)">
                 <p *ngIf="allowCertification" style="color: #808495;font-size:11px;margin-bottom: 15px;">File Allowed:
@@ -345,9 +348,14 @@
                         style="--border-radius: 2px;background: #f5f6fa;height: 30px; width: 40%;font-size: 12px;text-transform: none">
                         Clear
                     </ion-button>
-                    <ion-button
+                    <ion-button *ngIf="allowCertification "
                         style="--border-radius: 2px;height: 30px; width: 57%;font-size: 12px;text-transform: none"
-                        [disabled]="!applyLeaveForm.valid" (click)="postData()">
+                        [disabled]="!applyLeaveForm.valid || uploadedFile == undefined" (click)="postData()">
+                        Submit
+                    </ion-button>
+                    <ion-button *ngIf="!allowCertification "
+                        style="--border-radius: 2px;height: 30px; width: 57%;font-size: 12px;text-transform: none"
+                        [disabled]="!applyLeaveForm.valid " (click)="postData()">
                         Submit
                     </ion-button>
                 </div>
