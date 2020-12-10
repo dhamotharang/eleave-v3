@@ -364,6 +364,8 @@ export class ApplyLeaveComponent implements OnInit {
         formData.append('file', fileToSave, fileToSave.name);
         this.apiService.post_file(formData).subscribe(res => {
             this.uploadedFile = res;
+        }, error => {
+            this.leaveAPI.openSnackBar('Failed to upload attachment. Please make sure the attachment is less than 5MB', false);
         });
     }
 
