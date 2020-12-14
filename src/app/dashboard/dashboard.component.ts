@@ -329,18 +329,29 @@ export class DashboardComponent implements OnInit {
             this.annualDaysToGo = this.calculateDays(this.annualVal.YEAR);
             this.dashboardAPI.get_user_application_status(this.annualVal.USER_GUID).subscribe(val => {
                 this.applicationStatus = val;
-                for (let i = 0; i < this.applicationStatus.length; i++) {
-                    this.leaveApi.get_leavetype_entitlement_id(this.applicationStatus[i].entitlementId).subscribe(data => {
-                        if (new Date(this.applicationStatus[i].endDate) >= this.todayDate) {
-                            this.applicationStatus[i]["allowPopUpCancel"] = true;
-                        } else {
-                            if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
-                                this.applicationStatus[i]["allowPopUpCancel"] = true;
-                            } else {
-                                this.applicationStatus[i]["allowPopUpCancel"] = false;
-                            }
-                        }
-                    })
+                let categoriesLeavetype = [];
+                categoriesLeavetype = require('lodash').groupBy(this.applicationStatus, 'leaveTypeId');
+                for (let i = 0; i < Object.values(categoriesLeavetype).length; i++) {
+                    if ((Object.values(categoriesLeavetype)[i][0]).entitlementId != 'Anniversary Policy') {
+                        this.leaveApi.get_leavetype_entitlement_id((Object.values(categoriesLeavetype)[i][0]).entitlementId).subscribe(data => {
+                            Object.values(categoriesLeavetype)[i].forEach(element => {
+                                if (new Date(element.endDate) >= this.todayDate) {
+                                    element["allowPopUpCancel"] = true;
+                                } else {
+                                    if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
+                                        element["allowPopUpCancel"] = true;
+                                    } else {
+                                        element["allowPopUpCancel"] = false;
+                                    }
+                                }
+                                this.applicationStatus.forEach(item => {
+                                    if (item.leaveTransactionId === element.leaveTransactionId) {
+                                        item["allowPopUpCancel"] = element.allowPopUpCancel;
+                                    }
+                                });
+                            });
+                        });
+                    }
                 }
             })
         })
