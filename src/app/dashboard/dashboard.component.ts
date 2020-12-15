@@ -371,9 +371,6 @@ export class DashboardComponent implements OnInit {
     get_task_list() {
         this.dashboardAPI.get_task_list().subscribe(data => {
             this.tasks = data;
-            if (this.tasks.status == undefined) {
-                this.tasks.sort((a, b) => new Date(b.dateApplied).getTime() - new Date(a.dateApplied).getTime())
-            }
         });
     }
 
