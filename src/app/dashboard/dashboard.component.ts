@@ -286,7 +286,7 @@ export class DashboardComponent implements OnInit {
      */
     async openTaskDialog(list: any) {
         const dialog = this.dashboardAPI.dialog.open(LeaveApplicationConfirmationComponent, {
-            data: { title: 'task', name: list.employeeName, leavetype: list.leaveTypeName, transactionId: list.leaveTransactionId, appliedDate: list.dateApplied, reason: list.reason, status: list.status, startDate: list.startDate, endDate: list.endDate, noOfDays: list.noOfDays, timeslot: list.timeSlot },
+            data: { title: 'task', name: list.employeeName, leavetype: list.leaveTypeName, transactionId: list.leaveTransactionId, appliedDate: list.dateApplied, reason: list.reason, status: list.status, startDate: list.startDate, endDate: list.endDate, noOfDays: list.noOfDays, timeslot: list.timeSlot, attachment: list.attachment, link: this.url.link },
             height: "460px",
             width: "440px",
             panelClass: 'custom-dialog-container'

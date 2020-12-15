@@ -24,6 +24,10 @@
     <strong>Duration: </strong>Quarter Day - {{data.timeslot}}</p>
   <p style="color: #43425d;line-height: 1.25;font-size: 12px;margin-bottom: 16px;">
     <strong>Reason: </strong>{{data.reason}}</p>
+  <p *ngIf="data.title === 'task' && data.attachment !== null"
+    style="color: #43425d;line-height: 1.25;font-size: 12px;margin-bottom: 16px;">
+    <strong>Attachment: </strong><a style="color: #7069d8;" [href]="data.link+data.attachment"
+      download>{{data.attachment}}</a></p>
   <p style="color: #43425d;line-height: 1.25;font-size: 12px;margin-bottom: 16px;">
     <strong>Status: {{data.status | titlecase}}</strong></p>
   <div style="width: 100%;border-bottom: 1px solid #43425d; opacity: 0.1;"></div>
