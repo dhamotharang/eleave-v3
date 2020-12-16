@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   API_URL: 'https://appcore.beesuite.app',
-  FORGET_PASS_URL: 'https://resetpassword.beesuite.app'
+  FORGET_PASS_URL: 'https://resetpassword.beesuite.app',
+  AUTH_URL: 'https://auth.beesuite.app'
 };
 
 

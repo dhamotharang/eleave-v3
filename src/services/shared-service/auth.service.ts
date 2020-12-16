@@ -22,6 +22,13 @@ export class AuthService {
      */
     public baseUrl: string = environment.API_URL;
 
+    /**
+     * auth for login only
+     * @type {string}
+     * @memberof AuthService
+     */
+    public authUrl: string = environment.AUTH_URL;
+
     public redirectUrl: string;
 
 
@@ -57,7 +64,7 @@ export class AuthService {
      * @memberof AuthService
      */
     login(email: string, password: string) {
-        return this.httpClient.post<any>(this.baseUrl + `/api/auth/login`, { email, password })
+        return this.httpClient.post<any>(this.authUrl + `/api/auth/login`, { email, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.access_token) {
