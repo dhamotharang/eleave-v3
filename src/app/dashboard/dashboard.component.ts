@@ -111,6 +111,19 @@ export class DashboardComponent implements OnInit {
      */
     public replaceVal: number = 0;
 
+    public latestActiveBalance:any;
+
+    public activeReplacementList: any;
+
+    public expiredReplacementList: any;
+
+    /**
+     * expired RL list
+     * @type {*}
+     * @memberof DashboardComponent
+     */
+    public expiredRL: any;
+
     /**
      * expiry days for replacement leave
      * @type {number}
@@ -147,13 +160,6 @@ export class DashboardComponent implements OnInit {
     public applicationStatus: any;
 
     /**
-     * expired replacement leave
-     * @type {*}
-     * @memberof DashboardComponent
-     */
-    public expiredRL: number = 0;
-
-    /**
      * annual leave days to go
      * @type {number}
      * @memberof DashboardComponent
@@ -166,13 +172,6 @@ export class DashboardComponent implements OnInit {
      * @memberof DashboardComponent
      */
     public url: any;
-
-    /**
-     * expired date of RL
-     * @type {*}
-     * @memberof DashboardComponent
-     */
-    public expiredDate: any;
 
     /**
      * get today's date
@@ -380,22 +379,24 @@ export class DashboardComponent implements OnInit {
      * @memberof DashboardComponent
      */
     get_RL() {
-        this.dashboardAPI.get_detailed_RL().subscribe(details => {
+        this.dashboardAPI.get_replacement_leave().subscribe(details => {
             const RL = details;
+            this.activeReplacementList = details.active;
+            this.expiredReplacementList = details.expired;
+            this.activeReplacementList.sort(function (a, b) {
+                return new Date(a.EXPIREDATE).getTime() - new Date(b.EXPIREDATE).getTime();
+            });
+
             this.showSpinner = false;
             let date = [];
             if (RL.status == undefined) {
                 this.replaceVal = RL.balance;
-                for (let i = 0; i < RL.active.length; i++) {
-                    // this.replaceVal += RL.active[i].DAYS_ADDED;
-                    date.push(RL.active[i].EXPIREDATE);
-                }
-                for (let i = 0; i < RL.expired.length; i++) {
-                    this.expiredRL += RL.expired[i].DAYS_ADDED;
+                for (let i = 0; i < this.activeReplacementList.length; i++) {
+                    this.latestActiveBalance = this.activeReplacementList[0].DAYS_ADDED;
+                    date.push(this.activeReplacementList[0].EXPIREDATE);
                 }
                 if (date.every((val, i, arr) => val === arr[0])) {
                     this.RLDaysToGo = this.calculateDays(date[0]);
-                    this.expiredDate = date[0];
                 }
             }
         })
