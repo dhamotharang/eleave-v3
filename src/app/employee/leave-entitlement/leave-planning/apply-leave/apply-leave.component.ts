@@ -7,6 +7,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { LeavePlanningAPIService } from '../leave-planning-api.service';
 import { AppDateAdapter, APP_DATE_FORMATS } from '../../../../../../src/app/employee/date.adapter';
 import { ApplyLeaveConfirmationComponent } from './apply-leave-confirmation/apply-leave-confirmation.component';
+import { DashboardApiService } from '../../../../dashboard/dashboard-api.service';
 const dayjs = require('dayjs');
 /**
  * Apply Leave Page
@@ -64,6 +65,13 @@ export class ApplyLeaveComponent implements OnInit {
      * @memberof ApplyLeaveComponent
      */
     public maxDate: string;
+
+    /**
+     * Property for replacement leave max date
+     * @type {string}
+     * @memberof ApplyLeaveComponent
+     */
+    public RLMaxDate: string;
 
     /**
      * Local property for leave form group
@@ -289,7 +297,7 @@ export class ApplyLeaveComponent implements OnInit {
      * @param {LeavePlanningAPIService} leaveAPI
      * @memberof ApplyLeaveComponent
      */
-    constructor(private apiService: APIService, private route: ActivatedRoute, private leaveAPI: LeavePlanningAPIService) {
+    constructor(private apiService: APIService, private route: ActivatedRoute, private leaveAPI: LeavePlanningAPIService, private dashboardAPI: DashboardApiService) {
         this.applyLeaveForm = new FormGroup({
             leaveTypes: new FormControl('', Validators.required),
             firstPicker: new FormControl('', Validators.required),
@@ -349,6 +357,16 @@ export class ApplyLeaveComponent implements OnInit {
             this.allowHalfQuarDay = data.PROPERTIES_XML.applyFractionUnit;
             this.allowShortNotice = data.PROPERTIES_XML.applyBeforeProperties.isAllowShortNotice.isCheck;
             this.makeAsEmergency = data.PROPERTIES_XML.applyBeforeProperties.markAsEmergency;
+            if (data.PROPERTIES_XML.claimEntitlement) {
+                this.dashboardAPI.get_replacement_leave().subscribe(details => {
+                    const active = details.active;
+                    active.sort(function (a, b) {
+                        return new Date(b.EXPIREDATE).getTime() - new Date(a.EXPIREDATE).getTime();
+                    });
+                    const toDate: string = dayjs(active[0].EXPIREDATE).format('YYYY-MM-DD');
+                    this.RLMaxDate = toDate;
+                })
+            }
         })
     }
     /**
@@ -460,6 +478,7 @@ export class ApplyLeaveComponent implements OnInit {
                         this.daysCount = 0;
                         this.minDate = '';
                         this.maxDate = '';
+                        this.RLMaxDate = '';
                         this.emergency = false;
                         if (val.valid === true) {
                             this.leaveAPI.openSnackBar(val.message, true);

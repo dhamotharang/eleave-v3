@@ -56,7 +56,8 @@
                     <mat-form-field class="date" appearance="outline">
                         <mat-label>Start date</mat-label>
                         <input class="dateInput" matInput [matDatepicker]="picker1" formControlName="firstPicker"
-                            required (dateInput)="getValueFrom($event)" [max]="maxDate" (dateChange)="onDateChange()">
+                            required (dateInput)="getValueFrom($event)"
+                            [max]="RLMaxDate!= undefined ? RLMaxDate:maxDate" (dateChange)="onDateChange()">
                         <div class="calendar-icon" [inlineSVG]="'assets/icon/option/calendar.svg'"
                             (click)="picker1.open()">
                         </div>
@@ -68,7 +69,8 @@
                     <mat-form-field class="date" appearance="outline">
                         <mat-label>End date</mat-label>
                         <input class="dateInput" matInput [matDatepicker]="picker2" formControlName="secondPicker"
-                            required (dateInput)="getValueTo($event)" [min]="minDate" (dateChange)="onDateChange()">
+                            required (dateInput)="getValueTo($event)" [min]="minDate"
+                            [max]="RLMaxDate!= undefined ? RLMaxDate:''" (dateChange)="onDateChange()">
                         <div class="calendar-icon" [inlineSVG]="'assets/icon/option/calendar.svg'"
                             (click)="picker2.open()">
                         </div>
@@ -93,7 +95,8 @@
                     <mat-form-field class="date" appearance="outline" style="width: -webkit-fill-available;">
                         <mat-label>Start date</mat-label>
                         <input class="dateInput" matInput [matDatepicker]="picker3" formControlName="firstPicker"
-                            required (dateInput)="getValueFrom($event)" [max]="maxDate" (dateChange)="onDateChange()">
+                            required (dateInput)="getValueFrom($event)"
+                            [max]="RLMaxDate!= undefined ? RLMaxDate:maxDate" (dateChange)="onDateChange()">
                         <div class="calendar-icon" [inlineSVG]="'assets/icon/option/calendar.svg'"
                             (click)="picker3.open()">
                         </div>
@@ -104,7 +107,8 @@
                     <mat-form-field class="date" appearance="outline" style="width: -webkit-fill-available;">
                         <mat-label>End date</mat-label>
                         <input class="dateInput" matInput [matDatepicker]="picker4" formControlName="secondPicker"
-                            required (dateInput)="getValueTo($event)" [min]="minDate" (dateChange)="onDateChange()">
+                            required (dateInput)="getValueTo($event)" [min]="minDate"
+                            [max]="RLMaxDate!= undefined ? RLMaxDate:''" (dateChange)="onDateChange()">
                         <div class="calendar-icon" [inlineSVG]="'assets/icon/option/calendar.svg'"
                             (click)="picker4.open()">
                         </div>
