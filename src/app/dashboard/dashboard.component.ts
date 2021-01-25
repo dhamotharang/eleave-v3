@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
      */
     public replaceVal: number = 0;
 
-    public latestActiveBalance:any;
+    public latestActiveBalance: any;
 
     public activeReplacementList: any;
 
@@ -243,7 +243,8 @@ export class DashboardComponent implements OnInit {
      * @memberof DashboardComponent
      */
     ngOnInit() {
-        this.todayDate = new Date();
+        const today = new Date();
+        this.todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
         this.dashboardAPI.get_birthday_details().subscribe(data => {
             this.birthdayDetail = data;
             this.row = true;
@@ -331,26 +332,26 @@ export class DashboardComponent implements OnInit {
                 let categoriesLeavetype = [];
                 categoriesLeavetype = require('lodash').groupBy(this.applicationStatus, 'leaveTypeId');
                 for (let i = 0; i < Object.values(categoriesLeavetype).length; i++) {
-                    if ((Object.values(categoriesLeavetype)[i][0]).entitlementId != 'Anniversary Policy') {
-                        this.leaveApi.get_leavetype_entitlement_id((Object.values(categoriesLeavetype)[i][0]).entitlementId).subscribe(data => {
-                            Object.values(categoriesLeavetype)[i].forEach(element => {
-                                if (new Date(element.endDate) >= this.todayDate) {
+                    this.leaveApi.get_leavetype_entitlement_id((Object.values(categoriesLeavetype)[i][0]).entitlementId).subscribe(data => {
+                        Object.values(categoriesLeavetype)[i].forEach(element => {
+                            const end = new Date(element.endDate);
+                            const applicationDate = new Date(end.getFullYear(), end.getMonth(), end.getDate(), 0, 0, 0);
+                            if (applicationDate >= this.todayDate) {
+                                element["allowPopUpCancel"] = true;
+                            } else {
+                                if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
                                     element["allowPopUpCancel"] = true;
                                 } else {
-                                    if (data.PROPERTIES_XML.isAllowLeaveCancelAfterDate.isCheck) {
-                                        element["allowPopUpCancel"] = true;
-                                    } else {
-                                        element["allowPopUpCancel"] = false;
-                                    }
+                                    element["allowPopUpCancel"] = false;
                                 }
-                                this.applicationStatus.forEach(item => {
-                                    if (item.leaveTransactionId === element.leaveTransactionId) {
-                                        item["allowPopUpCancel"] = element.allowPopUpCancel;
-                                    }
-                                });
+                            }
+                            this.applicationStatus.forEach(item => {
+                                if (item.leaveTransactionId === element.leaveTransactionId) {
+                                    item["allowPopUpCancel"] = element.allowPopUpCancel;
+                                }
                             });
                         });
-                    }
+                    });
                 }
             })
         })
