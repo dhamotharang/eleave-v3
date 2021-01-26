@@ -12,17 +12,17 @@
             <i class="material-icons" style="font-size: 8px;margin: 16px;color: #43425d;">fiber_manual_record</i>
             <!-- <img style="margin: 15px;width: 12px;height:12px;float:left" src="assets/icon/dashboard/arrow_right.png"> -->
             <p style="display:inline-block;color: #4d4f5c; font-weight:bold;font-size:11px;line-height: 1.82;">
-                {{annualVal.BALANCE_DAYS | number : '1.2-2'}} days balance
+                {{annualVal.BALANCE_ENTITLED | number : '1.2-2'}} days balance
                 for this year </p>
         </div>
         <div style="display: block">
             <i class="material-icons" style="font-size: 8px;margin: 16px;color: #43425d;">fiber_manual_record</i>
             <!-- <img style="margin: 15px;width: 12px;height:12px;float:left" src="assets/icon/dashboard/arrow_right.png"> -->
-            <p *ngIf="annualVal.CF_DAYS != null"
+            <p *ngIf="annualVal.BALANCE_CF != null"
                 style="display: inline-block;color: #4d4f5c; font-weight:bold;font-size:11px;line-height: 1.82;">
-                {{annualVal.CF_DAYS | number : '1.2-2'}} days carry
+                {{annualVal.BALANCE_CF | number : '1.2-2'}} days carry
                 forward from last year</p>
-            <p *ngIf="annualVal.CF_DAYS == null"
+            <p *ngIf="annualVal.BALANCE_CF == null"
                 style="display: inline-block;color: #4d4f5c; font-weight:bold;font-size:11px;line-height: 1.82;">
                 0.00 days carry
                 forward from last year</p>
@@ -34,8 +34,7 @@
         <p style="margin-left: 42px;color: #4d4f5c; font-weight:bold;font-size:11px;line-height: 1.82;margin-top: 0;
             margin-bottom: 0;"> {{annualVal.BALANCE_DAYS | number : '1.2-2'}} Days</p>
         <p style="margin-left: 42px;font-size: 11px;font-weight: bold;line-height: 1.82;color: #ff6768;">
-            *Expiring
-            in {{annualDaysToGo}} days</p>
+            {{annualVal.EXPIRED_STATUS}}</p>
         <ion-item class="divider" lines="full"></ion-item>
 
         <div style="text-align: center;margin:30px">
@@ -92,7 +91,8 @@
             <p style="margin-left: 42px;font-size: 11px;font-weight: bold;line-height: 1.82;color: #ff6768;">
                 *Expired on {{item.EXPIREDATE | date:'d MMM yyyy'}}</p>
         </ng-container>
-        <ion-item *ngIf="expiredReplacementList && expiredReplacementList.length !== 0" class="divider" lines="full"></ion-item>
+        <ion-item *ngIf="expiredReplacementList && expiredReplacementList.length !== 0" class="divider" lines="full">
+        </ion-item>
 
         <div style="text-align: center;margin:30px">
             <ion-button [routerLink]="['/main/plan-my-leave']"
@@ -337,7 +337,7 @@
             margin-bottom: 0;width: 100%;">Days Available</p>
                 <p *ngIf="annualVal"
                     style="float:left;color: #ff6768;opacity: 0.8;font-weight: bold;font-size: 11px;line-height: 1.36;margin-top: 5px;">
-                    {{annualVal.BALANCE_DAYS | number : '1.2-2'}} Expiring in {{annualDaysToGo}} days
+                    {{annualVal.EXPIRED_STATUS}}
                 </p>
                 <p (click)="menuOpen=true;menu.enable(true, 'viewAnnualDetails');menu.enable(false, 'viewReplacementDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.open('viewAnnualDetails');"
                     style="cursor: pointer;margin-top: 5px;float: right;color:#3b86ff;opacity: 0.8;line-height: 1.36;font-size: 11px;font-weight: bold;">
