@@ -360,11 +360,13 @@ export class ApplyLeaveComponent implements OnInit {
             if (data.PROPERTIES_XML.claimEntitlement) {
                 this.dashboardAPI.get_replacement_leave().subscribe(details => {
                     const active = details.active;
-                    active.sort(function (a, b) {
-                        return new Date(b.EXPIREDATE).getTime() - new Date(a.EXPIREDATE).getTime();
-                    });
-                    const toDate: string = dayjs(active[0].EXPIREDATE).format('YYYY-MM-DD');
-                    this.RLMaxDate = toDate;
+                    if (active.length != 0) {
+                        active.sort(function (a, b) {
+                            return new Date(b.EXPIREDATE).getTime() - new Date(a.EXPIREDATE).getTime();
+                        });
+                        const toDate: string = dayjs(active[0].EXPIREDATE).format('YYYY-MM-DD');
+                        this.RLMaxDate = toDate;
+                    }
                 })
             }
         })
