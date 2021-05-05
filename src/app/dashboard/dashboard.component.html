@@ -359,7 +359,7 @@
                 margin-bottom: 0;width: 100%;">Days Available</p>
                 <p *ngIf="replaceVal != 0"
                     style="float:left;color: #ff6768;opacity: 0.8;font-weight: bold;font-size: 11px;line-height: 1.36;margin-top: 5px;">
-                    {{latestActiveBalance | number : '1.2-2'}} Expiring in {{RLDaysToGo}} days
+                    {{replaceVal | number : '1.2-2'}} Expiring in {{RLDaysToGo}} days
                 </p>
 
                 <p (click)="menuOpen=true;menu.enable(true, 'viewReplacementDetails');menu.enable(false, 'viewAnnualDetails');menu.enable(false, 'viewAnnouncementDetails');menu.enable(false, 'viewHolidayDetails');menu.enable(false, 'viewOnLeaveDetails');menu.open('viewReplacementDetails');"
