@@ -600,8 +600,10 @@ export class ApplyLeaveComponent implements OnInit {
                     }
                 }
                 this.getWeekDays(this.applyLeaveForm.value.firstPicker, this.applyLeaveForm.value.secondPicker, this._weekDayNumber, this._holiday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeHoliday, this._setupData.PROPERTIES_XML.applyBeforeProperties.excludeDayType.isExcludeRestDay);
-                if (!(this._arrayShortNotice[this._arrayShortNotice.length - 1].getDate() < this._dateArray[0].getDate())) {
-                    this.emergency = true;
+                if (this._arrayShortNotice.lenght > 0) {
+                    if (!(this._arrayShortNotice[this._arrayShortNotice.length - 1].getDate() < this._dateArray[0].getDate())) {
+                        this.emergency = true;
+                    }
                 }
             }
             this.dateSelection = this._dateArray;
